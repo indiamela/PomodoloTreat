@@ -15,7 +15,8 @@
 		F2A2F1E2263EA07800FE4FEA /* PomodoloTreat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F2A2F1E0263EA07800FE4FEA /* PomodoloTreat.xcdatamodeld */; };
 		F2A2F1ED263EA07900FE4FEA /* PomodoloTreatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A2F1EC263EA07900FE4FEA /* PomodoloTreatTests.swift */; };
 		F2A2F1F8263EA07900FE4FEA /* PomodoloTreatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A2F1F7263EA07900FE4FEA /* PomodoloTreatUITests.swift */; };
-		F2A2F208263EA47700FE4FEA /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A2F207263EA47700FE4FEA /* WelcomeView.swift */; };
+		F2A2F208263EA47700FE4FEA /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A2F207263EA47700FE4FEA /* HomeView.swift */; };
+		F2A2F20A263EC02100FE4FEA /* ColorExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A2F209263EC02100FE4FEA /* ColorExtention.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +51,8 @@
 		F2A2F1F3263EA07900FE4FEA /* PomodoloTreatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PomodoloTreatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2A2F1F7263EA07900FE4FEA /* PomodoloTreatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoloTreatUITests.swift; sourceTree = "<group>"; };
 		F2A2F1F9263EA07900FE4FEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F2A2F207263EA47700FE4FEA /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		F2A2F207263EA47700FE4FEA /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		F2A2F209263EC02100FE4FEA /* ColorExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtention.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,11 +105,12 @@
 			children = (
 				F2A2F1D5263EA07700FE4FEA /* PomodoloTreatApp.swift */,
 				F2A2F1D7263EA07700FE4FEA /* ContentView.swift */,
+				F2A2F209263EC02100FE4FEA /* ColorExtention.swift */,
 				F2A2F1D9263EA07800FE4FEA /* Assets.xcassets */,
 				F2A2F1DE263EA07800FE4FEA /* Persistence.swift */,
 				F2A2F1E3263EA07800FE4FEA /* Info.plist */,
 				F2A2F1E0263EA07800FE4FEA /* PomodoloTreat.xcdatamodeld */,
-				F2A2F207263EA47700FE4FEA /* WelcomeView.swift */,
+				F2A2F207263EA47700FE4FEA /* HomeView.swift */,
 				F2A2F1DB263EA07800FE4FEA /* Preview Content */,
 			);
 			path = PomodoloTreat;
@@ -268,7 +271,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2A2F208263EA47700FE4FEA /* WelcomeView.swift in Sources */,
+				F2A2F20A263EC02100FE4FEA /* ColorExtention.swift in Sources */,
+				F2A2F208263EA47700FE4FEA /* HomeView.swift in Sources */,
 				F2A2F1DF263EA07800FE4FEA /* Persistence.swift in Sources */,
 				F2A2F1D8263EA07700FE4FEA /* ContentView.swift in Sources */,
 				F2A2F1D6263EA07700FE4FEA /* PomodoloTreatApp.swift in Sources */,

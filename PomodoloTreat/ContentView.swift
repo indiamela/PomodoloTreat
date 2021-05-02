@@ -9,6 +9,41 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+    var body: some View {
+        TabView{
+            NavigationView{
+                HomeView()
+            }
+            .tabItem {
+                Image(systemName: "house")
+                Text("Home")
+            }
+            NavigationView{
+                HomeView()
+            }
+            .tabItem {
+                Image(systemName: "gift")
+                Text("Treat")
+            }
+            NavigationView{
+                HomeView()
+            }
+            .tabItem {
+                Image(systemName: "calendar")
+                Text("Calendar")
+            }
+            NavigationView{
+                HomeView()
+            }
+            .tabItem {
+                Image(systemName: "chart.bar.xaxis")
+                Text("Chart")
+            }
+        }
+        .accentColor(Color.MyTheme.yellowColor)
+    }
+}
+
 //    @Environment(\.managedObjectContext) private var viewContext
 //
 //    @FetchRequest(
@@ -16,8 +51,8 @@ struct ContentView: View {
 //        animation: .default)
 //    private var items: FetchedResults<Item>
 //
-    var body: some View {
-        WelcomeView()
+//    var body: some View {
+//        HomeView()
 //        List {
 //            ForEach(items) { item in
 //                Text("Item at \(item.timestamp!, formatter: itemFormatter)")
@@ -32,8 +67,8 @@ struct ContentView: View {
 //            Button(action: addItem) {
 //                Label("Add Item", systemImage: "plus")
 //            }
-        }
-    }
+//        }
+//    }
 //
 //    private func addItem() {
 //        withAnimation {

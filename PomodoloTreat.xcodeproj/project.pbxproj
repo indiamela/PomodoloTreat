@@ -87,7 +87,6 @@
 		F2A2F1C9263EA07600FE4FEA = {
 			isa = PBXGroup;
 			children = (
-				F2A2F216263F89CF00FE4FEA /* Models */,
 				F2A2F1D4263EA07700FE4FEA /* PomodoloTreat */,
 				F2A2F1EB263EA07900FE4FEA /* PomodoloTreatTests */,
 				F2A2F1F6263EA07900FE4FEA /* PomodoloTreatUITests */,
@@ -108,6 +107,7 @@
 		F2A2F1D4263EA07700FE4FEA /* PomodoloTreat */ = {
 			isa = PBXGroup;
 			children = (
+				F2A2F216263F89CF00FE4FEA /* Models */,
 				F2A2F211263F829900FE4FEA /* SubViews */,
 				F2A2F210263F827700FE4FEA /* Screens */,
 				F2A2F1D5263EA07700FE4FEA /* PomodoloTreatApp.swift */,
@@ -169,7 +169,8 @@
 			children = (
 				F2A2F214263F89C200FE4FEA /* TaskModel.swift */,
 			);
-			path = Models;
+			name = Models;
+			path = ../Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

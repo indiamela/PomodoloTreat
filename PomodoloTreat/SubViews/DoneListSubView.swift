@@ -28,16 +28,16 @@ struct DoneListSubView: View {
                     }
                 )
             HStack{
-                HStack{
-                    Text("1")
-                        .font(.title3)
+//                HStack{
+//                    Text("\(String(count))")
+//                        .font(.title3)
                     Text(task.title)
                         .multilineTextAlignment(.leading)
-                }
+//                }
                 Spacer()
                 VStack(alignment:.trailing){
                     HStack{
-                        Image(systemName: "😊")
+                        Image("happy")
                         Text("\(task.motivation)%")
                     }
                     Text("\(task.start_time)-\(task.end_time)")
@@ -50,9 +50,6 @@ struct DoneListSubView: View {
         .frame(width: 327,height: 60)
         .shadow(color: Color(#colorLiteral(red: 0.46666666865348816, green: 0.7333333492279053, blue: 0.9333333373069763, alpha: 0.25)), radius:10, x:10, y:10)
         .padding(10)
-
-//        .padding(.init(top: 0, leading: 20, bottom: 20, trailing: 20))
-
     }
 }
 

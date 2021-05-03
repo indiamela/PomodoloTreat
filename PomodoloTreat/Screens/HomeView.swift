@@ -9,12 +9,8 @@ import SwiftUI
 
 struct HomeView: View {
     @State var taskArray = [TaskModel]()
+    @State var showDetail = false
     var body: some View {
-//        let taskArray = [
-//            Task(title: "読書", motivation: 70, start_time: "12:00", end_time: "12:25"),
-//            Task(title: "映画", motivation: 50, start_time: "13:00", end_time: "13:25"),
-//            Task(title: "勉強", motivation: 80, start_time: "14:00", end_time: "14:25"),
-//        ]
         
         ZStack{
             Color.MyTheme.whiteColor
@@ -75,6 +71,9 @@ struct HomeView: View {
                     LazyVStack{
                         ForEach(taskArray,id:\.self){ task in
                             DoneListSubView(task: task)
+                                .onTapGesture {
+                                    showDetail.toggle()
+                                }
                         }
                     }
                 }

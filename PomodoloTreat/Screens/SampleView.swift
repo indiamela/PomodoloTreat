@@ -1,5 +1,5 @@
 //
-//  TaskDetailView.swift
+//  SampleView.swift
 //  PomodoloTreat
 //
 //  Created by Taishi Kusunose on 2021/05/03.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TaskDetailView: View {
+struct SampleView: View {
     @State var motivation: Double = 0
     @State var detailText: String = ""
     var body: some View {
@@ -123,9 +123,8 @@ struct TaskDetailView: View {
     }
 }
 
-struct TaskDetailView_Previews: PreviewProvider {
+struct SampleView_Previews: PreviewProvider {
     static var previews: some View {
-        TaskDetailView()
-        //            .previewLayout(.sizeThatFits)
+        SampleView()
     }
 }

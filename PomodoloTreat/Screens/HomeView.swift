@@ -97,6 +97,7 @@ struct HomeView: View {
         .onAppear(perform: {
             getTask()
         })
+        .navigationBarHidden(true)
     }
     func getTask(){
         let array1 = TaskModel(title: "読書", motivation: 70, start_time: "12:00", end_time: "12:25")
@@ -110,8 +111,8 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-//        NavigationView{
+        NavigationView{
             HomeView()
-//        }
+        }
     }
 }

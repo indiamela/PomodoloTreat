@@ -93,7 +93,7 @@ struct SampleView: View {
                         .fill(Color.white)
                         .frame(width: 95, height: 95)
                     RoundedRectangle(cornerRadius: 20)
-                        .fill(RadialGradient.RadialBlue)
+                        .fill(Color.white)
                         .frame(width: 95, height: 95)
                     RoundedRectangle(cornerRadius: 20)
                         .fill(Color.white)
@@ -112,9 +112,7 @@ struct SampleView: View {
                 .padding(.vertical,20)
                 .padding(.horizontal,20)
                 Image("createButton")
-                    
                     .frame(width: 335)
-                
             }
             .frame(width: 335)
             .background(Color.MyTheme.whiteColor)

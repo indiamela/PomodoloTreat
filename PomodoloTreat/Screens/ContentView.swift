@@ -14,12 +14,13 @@ struct ContentView: View {
             NavigationView{
                 HomeView()
             }
+            .navigationBarHidden(true)
             .tabItem {
                 Image(systemName: "house")
                 Text("Home")
             }
             NavigationView{
-                HomeView()
+                TreatView()
             }
             .tabItem {
                 Image(systemName: "gift")
@@ -28,6 +29,7 @@ struct ContentView: View {
             NavigationView{
                 HomeView()
             }
+            .navigationBarHidden(true)
             .tabItem {
                 Image(systemName: "calendar")
                 Text("Calendar")
@@ -35,6 +37,7 @@ struct ContentView: View {
             NavigationView{
                 HomeView()
             }
+            .navigationBarHidden(true)
             .tabItem {
                 Image(systemName: "chart.bar.xaxis")
                 Text("Chart")

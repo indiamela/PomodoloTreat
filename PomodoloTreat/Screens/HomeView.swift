@@ -8,7 +8,14 @@
 import SwiftUI
 
 struct HomeView: View {
+    @State var taskArray = [TaskModel]()
     var body: some View {
+//        let taskArray = [
+//            Task(title: "読書", motivation: 70, start_time: "12:00", end_time: "12:25"),
+//            Task(title: "映画", motivation: 50, start_time: "13:00", end_time: "13:25"),
+//            Task(title: "勉強", motivation: 80, start_time: "14:00", end_time: "14:25"),
+//        ]
+        
         ZStack{
             Color.MyTheme.whiteColor
                  .edgesIgnoringSafeArea(.all)
@@ -64,15 +71,27 @@ struct HomeView: View {
                 .frame(height:350)
                 
                 //MARK:LIST -
-                ScrollView{                    
-                    //Box
-                    VStack{
-                        DoneListSubView()
+                ScrollView{
+                    LazyVStack{
+                        ForEach(taskArray,id:\.self){ task in
+                            DoneListSubView(task: task)
+                        }
                     }
                 }
                 .offset(y:-30)
             }
         }
+        .onAppear(perform: {
+            getTask()
+        })
+    }
+    func getTask(){
+        let array1 = TaskModel(title: "読書", motivation: 70, start_time: "12:00", end_time: "12:25")
+        let array2 = TaskModel(title: "映画", motivation: 50, start_time: "13:00", end_time: "13:25")
+        let array3 = TaskModel(title: "勉強", motivation: 80, start_time: "14:00", end_time: "14:25")
+        taskArray.append(array1)
+        taskArray.append(array2)
+        taskArray.append(array3)
     }
 }
 

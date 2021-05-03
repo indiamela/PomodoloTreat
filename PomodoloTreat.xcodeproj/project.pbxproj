@@ -18,6 +18,7 @@
 		F2A2F208263EA47700FE4FEA /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A2F207263EA47700FE4FEA /* HomeView.swift */; };
 		F2A2F20A263EC02100FE4FEA /* ColorExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A2F209263EC02100FE4FEA /* ColorExtention.swift */; };
 		F2A2F213263F82BA00FE4FEA /* DoneListSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A2F212263F82BA00FE4FEA /* DoneListSubView.swift */; };
+		F2A2F215263F89C200FE4FEA /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A2F214263F89C200FE4FEA /* TaskModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		F2A2F207263EA47700FE4FEA /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		F2A2F209263EC02100FE4FEA /* ColorExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtention.swift; sourceTree = "<group>"; };
 		F2A2F212263F82BA00FE4FEA /* DoneListSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneListSubView.swift; sourceTree = "<group>"; };
+		F2A2F214263F89C200FE4FEA /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 		F2A2F1C9263EA07600FE4FEA = {
 			isa = PBXGroup;
 			children = (
+				F2A2F216263F89CF00FE4FEA /* Models */,
 				F2A2F1D4263EA07700FE4FEA /* PomodoloTreat */,
 				F2A2F1EB263EA07900FE4FEA /* PomodoloTreatTests */,
 				F2A2F1F6263EA07900FE4FEA /* PomodoloTreatUITests */,
@@ -159,6 +162,14 @@
 				F2A2F212263F82BA00FE4FEA /* DoneListSubView.swift */,
 			);
 			path = SubViews;
+			sourceTree = "<group>";
+		};
+		F2A2F216263F89CF00FE4FEA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F2A2F214263F89C200FE4FEA /* TaskModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -296,6 +307,7 @@
 				F2A2F1DF263EA07800FE4FEA /* Persistence.swift in Sources */,
 				F2A2F1D8263EA07700FE4FEA /* ContentView.swift in Sources */,
 				F2A2F1D6263EA07700FE4FEA /* PomodoloTreatApp.swift in Sources */,
+				F2A2F215263F89C200FE4FEA /* TaskModel.swift in Sources */,
 				F2A2F1E2263EA07800FE4FEA /* PomodoloTreat.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

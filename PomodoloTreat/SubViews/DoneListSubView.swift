@@ -8,6 +8,13 @@
 import SwiftUI
 
 struct DoneListSubView: View {
+//    var number:Int
+//    var title:String
+//    var motivation:Int
+//    var start_time:String
+//    var end_time:String
+    var task:TaskModel
+    
     var body: some View {
         ZStack{
             RoundedRectangle(cornerRadius: 8)
@@ -24,16 +31,16 @@ struct DoneListSubView: View {
                 HStack{
                     Text("1")
                         .font(.title3)
-                    Text("Placeholder")
+                    Text(task.title)
                         .multilineTextAlignment(.leading)
                 }
                 Spacer()
                 VStack(alignment:.trailing){
                     HStack{
-                        Image(systemName: "smile")
-                        Text("70%")
+                        Image(systemName: "😊")
+                        Text("\(task.motivation)%")
                     }
-                    Text("12:00-12:25")
+                    Text("\(task.start_time)-\(task.end_time)")
                 }
                 .frame(width: 100)
             }
@@ -50,8 +57,10 @@ struct DoneListSubView: View {
 }
 
 struct DoneListSubView_Previews: PreviewProvider {
+    var task:TaskModel
+
     static var previews: some View {
-        DoneListSubView()
+        DoneListSubView(task: TaskModel(title: "aaa", motivation: 70, start_time: "00:00", end_time: "00:00"))
             .previewLayout(.sizeThatFits)
     }
 }

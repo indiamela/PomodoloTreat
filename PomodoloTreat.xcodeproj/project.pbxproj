@@ -11,6 +11,7 @@
 		F246830F263FDD790060223A /* MultilineTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246830E263FDD790060223A /* MultilineTextView.swift */; };
 		F2468313263FFFD20060223A /* TreatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2468312263FFFD20060223A /* TreatView.swift */; };
 		F24683152640080C0060223A /* TreatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24683142640080C0060223A /* TreatModel.swift */; };
+		F246831726400DC00060223A /* TreatSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246831626400DC00060223A /* TreatSubView.swift */; };
 		F2A2F1D6263EA07700FE4FEA /* PomodoloTreatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A2F1D5263EA07700FE4FEA /* PomodoloTreatApp.swift */; };
 		F2A2F1D8263EA07700FE4FEA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A2F1D7263EA07700FE4FEA /* ContentView.swift */; };
 		F2A2F1DA263EA07800FE4FEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2A2F1D9263EA07800FE4FEA /* Assets.xcassets */; };
@@ -47,6 +48,7 @@
 		F246830E263FDD790060223A /* MultilineTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextView.swift; sourceTree = "<group>"; };
 		F2468312263FFFD20060223A /* TreatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreatView.swift; sourceTree = "<group>"; };
 		F24683142640080C0060223A /* TreatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreatModel.swift; sourceTree = "<group>"; };
+		F246831626400DC00060223A /* TreatSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreatSubView.swift; sourceTree = "<group>"; };
 		F2A2F1D2263EA07700FE4FEA /* PomodoloTreat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomodoloTreat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2A2F1D5263EA07700FE4FEA /* PomodoloTreatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoloTreatApp.swift; sourceTree = "<group>"; };
 		F2A2F1D7263EA07700FE4FEA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				F2A2F212263F82BA00FE4FEA /* DoneListSubView.swift */,
+				F246831626400DC00060223A /* TreatSubView.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F246831726400DC00060223A /* TreatSubView.swift in Sources */,
 				F2A2F213263F82BA00FE4FEA /* DoneListSubView.swift in Sources */,
 				F2468313263FFFD20060223A /* TreatView.swift in Sources */,
 				F2A2F20A263EC02100FE4FEA /* ColorExtention.swift in Sources */,

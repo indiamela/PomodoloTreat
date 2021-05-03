@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F246830D263FC1480060223A /* TaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246830C263FC1480060223A /* TaskDetailView.swift */; };
+		F246830F263FDD790060223A /* MultilineTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246830E263FDD790060223A /* MultilineTextView.swift */; };
 		F2A2F1D6263EA07700FE4FEA /* PomodoloTreatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A2F1D5263EA07700FE4FEA /* PomodoloTreatApp.swift */; };
 		F2A2F1D8263EA07700FE4FEA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A2F1D7263EA07700FE4FEA /* ContentView.swift */; };
 		F2A2F1DA263EA07800FE4FEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2A2F1D9263EA07800FE4FEA /* Assets.xcassets */; };
@@ -39,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F246830C263FC1480060223A /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
+		F246830E263FDD790060223A /* MultilineTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextView.swift; sourceTree = "<group>"; };
 		F2A2F1D2263EA07700FE4FEA /* PomodoloTreat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomodoloTreat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2A2F1D5263EA07700FE4FEA /* PomodoloTreatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoloTreatApp.swift; sourceTree = "<group>"; };
 		F2A2F1D7263EA07700FE4FEA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -151,6 +155,8 @@
 			isa = PBXGroup;
 			children = (
 				F2A2F207263EA47700FE4FEA /* HomeView.swift */,
+				F246830C263FC1480060223A /* TaskDetailView.swift */,
+				F246830E263FDD790060223A /* MultilineTextView.swift */,
 				F2A2F1D7263EA07700FE4FEA /* ContentView.swift */,
 			);
 			path = Screens;
@@ -307,9 +313,11 @@
 				F2A2F208263EA47700FE4FEA /* HomeView.swift in Sources */,
 				F2A2F1DF263EA07800FE4FEA /* Persistence.swift in Sources */,
 				F2A2F1D8263EA07700FE4FEA /* ContentView.swift in Sources */,
+				F246830F263FDD790060223A /* MultilineTextView.swift in Sources */,
 				F2A2F1D6263EA07700FE4FEA /* PomodoloTreatApp.swift in Sources */,
 				F2A2F215263F89C200FE4FEA /* TaskModel.swift in Sources */,
 				F2A2F1E2263EA07800FE4FEA /* PomodoloTreat.xcdatamodeld in Sources */,
+				F246830D263FC1480060223A /* TaskDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

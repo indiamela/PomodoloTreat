@@ -11,7 +11,7 @@ import SwiftUI
 struct TaskModel: Identifiable, Hashable{
     var id = UUID()
     var title:String
-    var motivation:Int
+    var motivation:Double
     var start_time:String
     var end_time:String
     

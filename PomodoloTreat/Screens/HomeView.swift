@@ -9,8 +9,10 @@ import SwiftUI
 
 struct HomeView: View {
     @State var taskArray = [TaskModel]()
+    @State var array:TaskModel = TaskModel(title: "", motivation: 0.0, start_time: "", end_time: "")
     @State var showDetail = false
     @State var opacity = 0.0
+    
     var body: some View {
         
         ZStack{
@@ -75,6 +77,7 @@ struct HomeView: View {
                         ForEach(taskArray,id:\.self){ task in
                             DoneListSubView(task: task)
                                 .onTapGesture {
+                                    array = task
                                     showDetail.toggle()
                                 }
                         }
@@ -94,7 +97,7 @@ struct HomeView: View {
                             self.opacity = 0
                         }
                         .opacity(0.8)
-                    TaskDetailView()
+                    TaskDetailView(taskArray: $array)
                 }
                 .opacity(self.opacity)
                 .onAppear {

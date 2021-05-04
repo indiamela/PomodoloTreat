@@ -38,7 +38,7 @@ struct DoneListSubView: View {
                 VStack(alignment:.trailing){
                     HStack{
                         Image("happy")
-                        Text("\(task.motivation)%")
+                        Text("\(Int(task.motivation))%")
                     }
                     Text("\(task.start_time)-\(task.end_time)")
                 }

@@ -8,15 +8,20 @@
 import SwiftUI
 
 struct TaskDetailView: View {
+    @Binding var taskArray:TaskModel
     @State var motivation: Double = 0
     @State var detailText: String = ""
+//    @Binding var title:String
+//    @Binding var array:TaskModel
+    
     var body: some View {
-        VStack{
-            
+        ZStack{
+            Color.clear
+                .edgesIgnoringSafeArea(.all)
             VStack{
                 //Title
                 HStack{
-                    Text("読書")
+                    Text(taskArray.title)
                         .font(.title)
                         .shadow(color: Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)), radius:4, x:0, y:4)
                     Spacer()
@@ -28,7 +33,7 @@ struct TaskDetailView: View {
                 HStack(){
                     Image("calendar")
                     //3rd Feb
-                    Text("2021.05.02 12:00 - 12:25").font(.custom("Roboto Medium", size: 14))
+                    Text("\(taskArray.start_time)-\(taskArray.end_time)").font(.custom("Roboto Medium", size: 14))
                     Spacer()
                 }
                 .padding(.top,10)
@@ -39,14 +44,14 @@ struct TaskDetailView: View {
                     ZStack{
                         LinearGradient.gradientOrange
                             .frame(height:30)
-                            .mask(Slider(value: $motivation,in: 0...100, step:1))
-                        Slider(value: $motivation,in: 0...100, step:1)
+                            .mask(Slider(value: $taskArray.motivation,in: 0...100, step:1))
+                        Slider(value: $taskArray.motivation,in: 0...100, step:1)
                             .opacity(0.05)
                     }
                     HStack{
                         Image("sad")
                         Spacer()
-                        Text("\(Int(motivation))")
+                        Text("\(Int(taskArray.motivation))")
                         Spacer()
                         Image("happy")
                     }
@@ -114,8 +119,9 @@ struct TaskDetailView: View {
 }
 
 struct TaskDetailView_Previews: PreviewProvider {
+    @State static var array:TaskModel = TaskModel(title: "読書", motivation: 70, start_time: "12:00", end_time: "12:25")
     static var previews: some View {
-        TaskDetailView()
+        TaskDetailView(taskArray: $array)
         //            .previewLayout(.sizeThatFits)
     }
 }

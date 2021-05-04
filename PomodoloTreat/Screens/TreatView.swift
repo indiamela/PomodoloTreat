@@ -23,6 +23,7 @@ struct TreatView: View {
             VStack{
                 Image("card")
                     .resizable()
+                    .frame(width:.infinity)
                     .aspectRatio(contentMode: .fit)
                     .padding(.top,20)
                     .opacity(0.3)
@@ -53,7 +54,6 @@ struct TreatView: View {
                     .onDelete{offsets in
                         self.treatArray.remove(atOffsets: offsets)}
                     .listRowBackground(Color.MyTheme.yellowColor.opacity(0.7))
-                    .shadow(color: Color.gray, radius:5, x:5, y:5)
                 }
             }
         }

@@ -20,11 +20,11 @@ struct HomeView: View {
             VStack{
                 ZStack{
                     //Rectangle
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(LinearGradient.gradientOrange)
-                        .opacity(0.8)
+                    RoundedRectangle(cornerRadius: 30)
+                        .fill(Color.MyTheme.yellowColor)
                         .edgesIgnoringSafeArea(.all)
                         .blur(radius: 30)
+
                     
                     VStack{
                         HStack{
@@ -44,19 +44,30 @@ struct HomeView: View {
                         Spacer()
                         
                         //25:00
-                        Text("25:00").font(.custom("Roboto Regular", size: 72)).foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
+                        Text("25:00")
+                            .font(.custom("Roboto Regular", size: 72))
+                            .foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
                             .multilineTextAlignment(.center)
                             .textCase(.uppercase)
                         
                         //start
-                        Text("start").font(.custom("Roboto Regular", size: 18))
-                            .foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))).tracking(1)
-                            .textCase(.uppercase)
-                            .padding(.top,30)
+                        //-background
+                        RoundedRectangle(cornerRadius: 30)
+                            .fill(Color.MyTheme.whiteColor)
+                            .frame(width: 250, height: 40)
+                            .shadow(color: Color.gray, radius:5, x:5, y:5)
+                            .overlay(
+                                Text("start").font(.custom("Roboto Regular", size: 18))
+                                    .textCase(.uppercase)
+                            )
+                        //                        Text("start").font(.custom("Roboto Regular", size: 18))
+                        //                            .foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))).tracking(1)
+//                            .textCase(.uppercase)
+//                            .padding(.top,30)
                         Spacer()
                     }
                 }
-                .frame(height:350)
+                .frame(height:300)
                 
                 //MARK:LIST -
                 ScrollView{

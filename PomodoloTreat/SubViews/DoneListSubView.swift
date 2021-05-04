@@ -18,7 +18,7 @@ struct DoneListSubView: View {
     var body: some View {
         ZStack{
             RoundedRectangle(cornerRadius: 8)
-                .fill(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
+                .fill(Color.white)
                 .overlay(
                     HStack{
                         RoundedRectangle(cornerRadius: 8)
@@ -49,7 +49,7 @@ struct DoneListSubView: View {
         }
         .frame(width: 327,height: 60)
         .shadow(color: Color(#colorLiteral(red: 0.46666666865348816, green: 0.7333333492279053, blue: 0.9333333373069763, alpha: 0.25)), radius:10, x:10, y:10)
-        .padding(10)
+        .padding(5)
     }
 }
 

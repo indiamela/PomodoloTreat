@@ -35,6 +35,14 @@ extension LinearGradient{
             startPoint: .leading,
             endPoint: .trailing)
     }
+    static var gradientOrangeOpacity:LinearGradient{
+        return LinearGradient(
+            gradient: Gradient(stops: [
+                                .init(color: Color(#colorLiteral(red: 1, green: 0.3803921639919281, blue: 0.4313725531101227, alpha: 1)), location: 0),
+                                .init(color: Color(#colorLiteral(red: 1, green: 0.7490196228027344, blue: 0.4431372582912445, alpha: 1)).opacity(0.3), location: 1)]),
+            startPoint: .top,
+            endPoint: .bottom)
+    }
     static var gradientBlue:LinearGradient{
         return LinearGradient(
             gradient: Gradient(stops: [

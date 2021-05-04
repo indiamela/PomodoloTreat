@@ -22,6 +22,7 @@ struct ContentView: View {
             NavigationView{
                 TreatView()
             }
+            .navigationBarHidden(true)
             .tabItem {
                 Image(systemName: "gift")
                 Text("Treat")

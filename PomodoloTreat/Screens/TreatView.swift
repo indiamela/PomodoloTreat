@@ -10,29 +10,55 @@ import SwiftUI
 struct TreatView: View {
     @State var treatArray:[String] = ["aaaaaa","bbbbb"]
     @State var new = ""
+    init(){
+        UITableView.appearance().backgroundColor = .clear
+        UITableViewCell.appearance().backgroundColor = .clear
+        UITableView.appearance().tableFooterView = UIView()
+    }
     
     var body: some View {
-        VStack(alignment: .leading){
-            HStack{
-                TextField("Create new Treat", text: $new)
-                Button(action: {
-                    treatArray.append(self.new)
-                }, label: {
-                    Image(systemName: "plus.circle.fill")
-                })
+        ZStack{
+            Color.MyTheme.whiteColor
+                .edgesIgnoringSafeArea(.all)
+            VStack{
+                Image("card")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .padding(.top,20)
+                    .opacity(0.3)
+                Spacer()
             }
-            .padding(20)
-            List{
-                ForEach(treatArray,id:\.self){ treat in
-                    Text(treat)
-                        .frame(height:30)
+            .edgesIgnoringSafeArea(.all)
+            VStack(alignment: .leading){
+                HStack{
+                    TextField("Create new Treat", text: $new)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .shadow(color: Color.gray, radius:5, x:5, y:5)
+
+                    Button(action: {
+                        treatArray.append(self.new)
+                    }, label: {
+                        Image(systemName: "plus.circle.fill")
+                            .font(.system(size: 25, weight: .medium, design: .default))
+                            .shadow(color: Color.gray, radius:5, x:5, y:5)
+                            .accentColor(Color.MyTheme.yellowColor)
+                    })
                 }
-                .onDelete{offsets in
-                    self.treatArray.remove(atOffsets: offsets)}
+                .padding(20)
+                List{
+                    ForEach(treatArray,id:\.self){ treat in
+                        Text(treat)
+                            .frame(height:30)
+                    }
+                    .onDelete{offsets in
+                        self.treatArray.remove(atOffsets: offsets)}
+                    .listRowBackground(Color.MyTheme.yellowColor.opacity(0.7))
+                    .shadow(color: Color.gray, radius:5, x:5, y:5)
+                }
             }
         }
-            .navigationBarTitle("Treat")
-            .navigationBarTitleDisplayMode(.large)
+        .navigationBarTitle("Reword")
+        .navigationBarTitleDisplayMode(.large)
     }
 }
 

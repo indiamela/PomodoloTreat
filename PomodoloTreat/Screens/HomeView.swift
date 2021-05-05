@@ -19,17 +19,6 @@ struct HomeView: View {
     @State var opacity = 0.0
     let availableMinutes = Array(1...59)
 
-    
-
-    
-//    @State var nowDate: Date = Date()
-//    let referenceDate: Date
-//    var timer: Timer {
-//        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {_ in
-//            self.nowDate = Date()
-//        }
-//    }
-//
     var body: some View {
         ZStack{
             Color.MyTheme.whiteColor
@@ -67,31 +56,36 @@ struct HomeView: View {
                             .foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
                             .multilineTextAlignment(.center)
                             .textCase(.uppercase)
+                            .shadow(color: Color.gray, radius:5, x:5, y:5)
+
                         
                         //start
                         //-background
+                        Image(systemName: timerManager.timerMode == .running ? "pause.circle.fill" : "play.circle.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 60, height: 60)
+                            .foregroundColor(Color.MyTheme.whiteColor)
+                            .shadow(color: Color.gray, radius:5, x:5, y:5)
+                            .onTapGesture(perform: {
+                                if self.timerManager.timerMode == .initial {
+                                    self.timerManager.setTimerLength(minutes: self.availableMinutes[0]*60)
+                                }
+                                self.timerManager.timerMode == .running ? self.timerManager.pause() : self.timerManager.start()
+                            })
                         Button(action: {
-                            if self.timerManager.timerMode == .initial {
-                                self.timerManager.setTimerLength(minutes: self.availableMinutes[0]*60)
-                            }
-                            self.timerManager.timerMode == .running ? self.timerManager.pause() : self.timerManager.start()
+                            self.timerManager.reset()
                         }, label: {
-                            RoundedRectangle(cornerRadius: 30)
-                                .fill(Color.MyTheme.whiteColor)
-                                .frame(width: 250, height: 40)
-                                .shadow(color: Color.gray, radius:5, x:5, y:5)
-                                .overlay(
-                                    Group{self.timerManager.timerMode == .running ? Text("stop") : Text("start")}
-                                        .font(.custom("Roboto Regular", size: 18))
-                                        .textCase(.uppercase)
-                                )
+                            Text("reset")
+                                .font((.custom("Roboto Regular", size: 25)))
+                                .padding()
                         })
-                        .accentColor(.black)
-
+                        .accentColor(Color.MyTheme.whiteColor)
+                        .opacity(self.timerManager.timerMode == .paused ? 1.0 : 0.0)
                         Spacer()
                     }
                 }
-                .frame(height:300)
+                .frame(height:350)
                 
                 //MARK:LIST -
                 ScrollView{
@@ -143,17 +137,10 @@ struct HomeView: View {
         taskArray.append(array2)
         taskArray.append(array3)
     }
+    func popupNew(){
+        //タイマーが0になったら新規作成モーダルを表示
+    }
     
-//    func countDownString(from date: Date) -> String {
-//        let calendar = Calendar(identifier: .gregorian)
-//        let components = calendar
-//            .dateComponents([.minute, .second],
-//                            from: nowDate,
-//                            to: referenceDate)
-//        return String(format: "%02d:%02d",
-//                      components.minute ?? 00,
-//                      components.second ?? 00)
-//    }
 }
 
 struct HomeView_Previews: PreviewProvider {

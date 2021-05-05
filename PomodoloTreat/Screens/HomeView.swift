@@ -8,7 +8,14 @@
 import SwiftUI
 
 struct HomeView: View {
-//    @EnvironmentObject var timeManager:TimeManager
+    
+        @Environment(\.managedObjectContext) private var viewContext
+    
+        @FetchRequest(
+            sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+            animation: .default)
+        private var items: FetchedResults<Item>
+
     @ObservedObject var timerManager = TimerManager()
 
     var toDate = Calendar.current.date(byAdding:.hour,value:1,to:Date())
@@ -131,19 +138,19 @@ struct HomeView: View {
                 }
             }
         }
-//        .onAppear(perform: {
-//            getTask()
-//        })
+        .onAppear(perform: {
+            getTask()
+        })
         .navigationBarHidden(true)
     }
-//    func getTask(){
-//        let array1 = TaskModel(title: "読書",memo: "いっぱい読んだ", motivation: 70, start_time: "12:00", end_time: "12:25")
-//        let array2 = TaskModel(title: "映画",memo: "いっぱいみた", motivation: 50, start_time: "13:00", end_time: "13:25")
-//        let array3 = TaskModel(title: "勉強",memo: "いっぱい勉強した", motivation: 80, start_time: "14:00", end_time: "14:25")
-//        taskArray.append(array1)
-//        taskArray.append(array2)
-//        taskArray.append(array3)
-//    }
+    func getTask(){
+        let array1 = TaskModel(title: "読書",memo: "いっぱい読んだ", motivation: 70, start_time: "12:00", end_time: "12:25")
+        let array2 = TaskModel(title: "映画",memo: "いっぱいみた", motivation: 50, start_time: "13:00", end_time: "13:25")
+        let array3 = TaskModel(title: "勉強",memo: "いっぱい勉強した", motivation: 80, start_time: "14:00", end_time: "14:25")
+        taskArray.append(array1)
+        taskArray.append(array2)
+        taskArray.append(array3)
+    }
     func popupNew(){
         //タイマーが0になったら新規作成モーダルを表示
     }

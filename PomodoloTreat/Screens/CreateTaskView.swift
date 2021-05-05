@@ -119,6 +119,13 @@ struct CreateTaskView: View {
             .frame(width: 335)
             .background(Color.MyTheme.whiteColor)
             .cornerRadius(20)
+            .overlay(
+                Image("pc")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 130)
+                    .position(x:300,y:0)
+                )
         }
     }
 }

@@ -30,6 +30,7 @@ class TimerManager: ObservableObject {
             if self.secondsLeft == 0 {
                 self.reset()
                 self.timeFinish = true
+                return
             }
             self.secondsLeft -= 1
         })

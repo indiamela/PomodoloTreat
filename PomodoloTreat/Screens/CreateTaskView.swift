@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct CreateTaskView: View {
-    @Binding var start_time: String
-    @Binding var end_time: String
+    var start_time: String = "12:00"
+    var end_time: String = "12:25"
+    @State var taskArray = [TaskModel]()
     @State var motivation: Double = 50
-    @State var detailText: String = ""
+    @State var memo: String = ""
     @State var title:String = ""
     
     var body: some View {
@@ -33,7 +34,8 @@ struct CreateTaskView: View {
                 HStack(){
                     Image("calendar")
                     //3rd Feb
-//                    Text("\(taskArray.start_time)-\(taskArray.end_time)").font(.custom("Roboto Medium", size: 14))
+                    Text("\(start_time)-\(end_time)")
+                        .font(.custom("Roboto Medium", size: 14))
                     Spacer()
                 }
                 .padding(.top,10)
@@ -63,7 +65,7 @@ struct CreateTaskView: View {
                 VStack(alignment: .leading){
                     Text("Memo")
                         .font(.caption)
-                    MultilineTextView(text: $detailText)
+                    MultilineTextView(text: $memo)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .frame(height: 70)
                 }
@@ -107,7 +109,8 @@ struct CreateTaskView: View {
                 .padding(.vertical,20)
                 .padding(.horizontal,20)
                 Button(action: {
-                    //create new
+                    let array = TaskModel(title: title,memo: memo, motivation: motivation, start_time: start_time, end_time: end_time)
+                    taskArray.append(array)
                 }, label: {
                     Image("createButton")
                         .frame(width: 335)
@@ -121,9 +124,9 @@ struct CreateTaskView: View {
 }
 
 struct CreateTaskView_Previews: PreviewProvider {
-    @State static var start_time:String = "12:00"
-    @State static var end_time:String = "12:25"
+//    @State static var start_time:String = "12:00"
+//    @State static var end_time:String = "12:25"
     static var previews: some View {
-        CreateTaskView(start_time: $start_time, end_time: $end_time)
+        CreateTaskView()
     }
 }

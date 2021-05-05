@@ -16,8 +16,9 @@ struct HomeView: View {
     @State var taskArray = [TaskModel]()
     @State var array:TaskModel = TaskModel(title: "",memo: "", motivation: 0.0, start_time: "", end_time: "")
     @State var showDetail = false
-    @State var showCreateView = false
     @State var opacity = 0.0
+    var start_time = "12:00"
+    var end_time = "12:00"
     let availableMinutes = Array(1...59)
 
     var body: some View {
@@ -70,7 +71,7 @@ struct HomeView: View {
                             .shadow(color: Color.gray, radius:5, x:5, y:5)
                             .onTapGesture(perform: {
                                 if self.timerManager.timerMode == .initial {
-                                    self.timerManager.setTimerLength(minutes: self.availableMinutes[0]*60)
+                                    self.timerManager.setTimerLength(minutes: self.availableMinutes[0]*3)
                                 }
                                 self.timerManager.timerMode == .running ? self.timerManager.pause() : self.timerManager.start()
                             })
@@ -102,7 +103,7 @@ struct HomeView: View {
                 }
                 .offset(y:-30)
             }
-            if showDetail || timerManager.secondsLeft == 0{
+            if showDetail || timerManager.timeFinish{
                 ZStack{
                     //Rectangle
                     Rectangle()
@@ -114,10 +115,11 @@ struct HomeView: View {
                             self.opacity = 0
                         }
                         .opacity(0.8)
-                    if showDetail{
+                //詳細画面開いていたら
+                    if showDetail && !self.timerManager.timeFinish {
                         TaskDetailView(taskArray: $array)
                     }else{
-                        TaskDetailView(taskArray: $array)
+                        CreateTaskView(start_time: "12:00", end_time: "12:25")
                     }
                 }
                 .opacity(self.opacity)
@@ -129,19 +131,19 @@ struct HomeView: View {
                 }
             }
         }
-        .onAppear(perform: {
-            getTask()
-        })
+//        .onAppear(perform: {
+//            getTask()
+//        })
         .navigationBarHidden(true)
     }
-    func getTask(){
-        let array1 = TaskModel(title: "読書",memo: "いっぱい読んだ", motivation: 70, start_time: "12:00", end_time: "12:25")
-        let array2 = TaskModel(title: "映画",memo: "いっぱいみた", motivation: 50, start_time: "13:00", end_time: "13:25")
-        let array3 = TaskModel(title: "勉強",memo: "いっぱい勉強した", motivation: 80, start_time: "14:00", end_time: "14:25")
-        taskArray.append(array1)
-        taskArray.append(array2)
-        taskArray.append(array3)
-    }
+//    func getTask(){
+//        let array1 = TaskModel(title: "読書",memo: "いっぱい読んだ", motivation: 70, start_time: "12:00", end_time: "12:25")
+//        let array2 = TaskModel(title: "映画",memo: "いっぱいみた", motivation: 50, start_time: "13:00", end_time: "13:25")
+//        let array3 = TaskModel(title: "勉強",memo: "いっぱい勉強した", motivation: 80, start_time: "14:00", end_time: "14:25")
+//        taskArray.append(array1)
+//        taskArray.append(array2)
+//        taskArray.append(array3)
+//    }
     func popupNew(){
         //タイマーが0になったら新規作成モーダルを表示
     }

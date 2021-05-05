@@ -8,13 +8,29 @@
 import SwiftUI
 
 struct HomeView: View {
+//    @EnvironmentObject var timeManager:TimeManager
+    @ObservedObject var timerManager = TimerManager()
+
+    var toDate = Calendar.current.date(byAdding:.hour,value:1,to:Date())
+    
     @State var taskArray = [TaskModel]()
     @State var array:TaskModel = TaskModel(title: "", motivation: 0.0, start_time: "", end_time: "")
     @State var showDetail = false
     @State var opacity = 0.0
+    let availableMinutes = Array(1...59)
+
     
+
+    
+//    @State var nowDate: Date = Date()
+//    let referenceDate: Date
+//    var timer: Timer {
+//        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {_ in
+//            self.nowDate = Date()
+//        }
+//    }
+//
     var body: some View {
-        
         ZStack{
             Color.MyTheme.whiteColor
                  .edgesIgnoringSafeArea(.all)
@@ -46,7 +62,7 @@ struct HomeView: View {
                         Spacer()
                         
                         //25:00
-                        Text("25:00")
+                        Text(secondsToMinutesAndSeconds(seconds: timerManager.secondsLeft))
                             .font(.custom("Roboto Regular", size: 72))
                             .foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
                             .multilineTextAlignment(.center)
@@ -54,18 +70,24 @@ struct HomeView: View {
                         
                         //start
                         //-background
-                        RoundedRectangle(cornerRadius: 30)
-                            .fill(Color.MyTheme.whiteColor)
-                            .frame(width: 250, height: 40)
-                            .shadow(color: Color.gray, radius:5, x:5, y:5)
-                            .overlay(
-                                Text("start").font(.custom("Roboto Regular", size: 18))
-                                    .textCase(.uppercase)
-                            )
-                        //                        Text("start").font(.custom("Roboto Regular", size: 18))
-                        //                            .foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))).tracking(1)
-//                            .textCase(.uppercase)
-//                            .padding(.top,30)
+                        Button(action: {
+                            if self.timerManager.timerMode == .initial {
+                                self.timerManager.setTimerLength(minutes: self.availableMinutes[0]*60)
+                            }
+                            self.timerManager.timerMode == .running ? self.timerManager.pause() : self.timerManager.start()
+                        }, label: {
+                            RoundedRectangle(cornerRadius: 30)
+                                .fill(Color.MyTheme.whiteColor)
+                                .frame(width: 250, height: 40)
+                                .shadow(color: Color.gray, radius:5, x:5, y:5)
+                                .overlay(
+                                    Group{self.timerManager.timerMode == .running ? Text("stop") : Text("start")}
+                                        .font(.custom("Roboto Regular", size: 18))
+                                        .textCase(.uppercase)
+                                )
+                        })
+                        .accentColor(.black)
+
                         Spacer()
                     }
                 }
@@ -121,6 +143,17 @@ struct HomeView: View {
         taskArray.append(array2)
         taskArray.append(array3)
     }
+    
+//    func countDownString(from date: Date) -> String {
+//        let calendar = Calendar(identifier: .gregorian)
+//        let components = calendar
+//            .dateComponents([.minute, .second],
+//                            from: nowDate,
+//                            to: referenceDate)
+//        return String(format: "%02d:%02d",
+//                      components.minute ?? 00,
+//                      components.second ?? 00)
+//    }
 }
 
 struct HomeView_Previews: PreviewProvider {

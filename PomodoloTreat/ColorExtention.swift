@@ -23,6 +23,9 @@ extension Color{
         static var whiteColor:Color{
             return Color("ColorWhite")
         }
+        static var blackColor:Color{
+            return Color.black
+        }
     }
 }
 

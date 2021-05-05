@@ -16,6 +16,7 @@ struct HomeView: View {
     @State var taskArray = [TaskModel]()
     @State var array:TaskModel = TaskModel(title: "", motivation: 0.0, start_time: "", end_time: "")
     @State var showDetail = false
+    @State var showCreateView = false
     @State var opacity = 0.0
     let availableMinutes = Array(1...59)
 
@@ -76,10 +77,10 @@ struct HomeView: View {
                         Button(action: {
                             self.timerManager.reset()
                         }, label: {
-                            Text("reset")
-                                .font((.custom("Roboto Regular", size: 25)))
-                                .padding()
+                            Image(systemName: "goforward")
                         })
+                        .font(.title)
+                        .padding(.top,10)
                         .accentColor(Color.MyTheme.whiteColor)
                         .opacity(self.timerManager.timerMode == .paused ? 1.0 : 0.0)
                         Spacer()
@@ -101,7 +102,7 @@ struct HomeView: View {
                 }
                 .offset(y:-30)
             }
-            if showDetail {
+            if showDetail || timerManager.secondsLeft == 0{
                 ZStack{
                     //Rectangle
                     Rectangle()
@@ -113,7 +114,11 @@ struct HomeView: View {
                             self.opacity = 0
                         }
                         .opacity(0.8)
-                    TaskDetailView(taskArray: $array)
+                    if showDetail{
+                        TaskDetailView(taskArray: $array)
+                    }else{
+                        TaskDetailView(taskArray: $array)
+                    }
                 }
                 .opacity(self.opacity)
                 .onAppear {

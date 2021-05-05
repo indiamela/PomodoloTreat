@@ -23,7 +23,6 @@ struct TreatView: View {
             VStack{
                 Image("card")
                     .resizable()
-                    .frame(width:.infinity)
                     .aspectRatio(contentMode: .fit)
                     .padding(.top,20)
                     .opacity(0.3)

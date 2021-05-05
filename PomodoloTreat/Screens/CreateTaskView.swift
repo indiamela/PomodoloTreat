@@ -61,7 +61,7 @@ struct CreateTaskView: View {
                 
                 //Text
                 VStack(alignment: .leading){
-                    Text("要点など")
+                    Text("Memo")
                         .font(.caption)
                     MultilineTextView(text: $detailText)
                         .textFieldStyle(RoundedBorderTextFieldStyle())

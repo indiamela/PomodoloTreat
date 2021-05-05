@@ -61,10 +61,12 @@ struct TaskDetailView: View {
                 
                 //Text
                 VStack(alignment: .leading){
-                    Text("要点など")
-                        .font(.caption)
-                    MultilineTextView(text: $detailText)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    HStack{
+                        Text("Memo")
+                            .font(.caption)
+                        Spacer()
+                    }
+                    Text(taskArray.memo)
                         .frame(height: 70)
                 }
                 .padding(.top,20)
@@ -106,9 +108,13 @@ struct TaskDetailView: View {
                 })
                 .padding(.vertical,20)
                 .padding(.horizontal,20)
-                Image("createButton")
-                    
-                    .frame(width: 335)
+                Button(action: {
+                    //showAlart
+                    //delete task
+                }, label: {
+                    Image("Delete")
+                        .frame(width: 335)
+                })
                 
             }
             .frame(width: 335)
@@ -119,7 +125,7 @@ struct TaskDetailView: View {
 }
 
 struct TaskDetailView_Previews: PreviewProvider {
-    @State static var array:TaskModel = TaskModel(title: "読書", motivation: 70, start_time: "12:00", end_time: "12:25")
+    @State static var array:TaskModel = TaskModel(title: "読書",memo:"いっぱい読んだ", motivation: 70, start_time: "12:00", end_time: "12:25")
     static var previews: some View {
         TaskDetailView(taskArray: $array)
         //            .previewLayout(.sizeThatFits)

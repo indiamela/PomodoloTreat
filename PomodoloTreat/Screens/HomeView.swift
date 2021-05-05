@@ -14,7 +14,7 @@ struct HomeView: View {
     var toDate = Calendar.current.date(byAdding:.hour,value:1,to:Date())
     
     @State var taskArray = [TaskModel]()
-    @State var array:TaskModel = TaskModel(title: "", motivation: 0.0, start_time: "", end_time: "")
+    @State var array:TaskModel = TaskModel(title: "",memo: "", motivation: 0.0, start_time: "", end_time: "")
     @State var showDetail = false
     @State var showCreateView = false
     @State var opacity = 0.0
@@ -135,9 +135,9 @@ struct HomeView: View {
         .navigationBarHidden(true)
     }
     func getTask(){
-        let array1 = TaskModel(title: "読書", motivation: 70, start_time: "12:00", end_time: "12:25")
-        let array2 = TaskModel(title: "映画", motivation: 50, start_time: "13:00", end_time: "13:25")
-        let array3 = TaskModel(title: "勉強", motivation: 80, start_time: "14:00", end_time: "14:25")
+        let array1 = TaskModel(title: "読書",memo: "いっぱい読んだ", motivation: 70, start_time: "12:00", end_time: "12:25")
+        let array2 = TaskModel(title: "映画",memo: "いっぱいみた", motivation: 50, start_time: "13:00", end_time: "13:25")
+        let array3 = TaskModel(title: "勉強",memo: "いっぱい勉強した", motivation: 80, start_time: "14:00", end_time: "14:25")
         taskArray.append(array1)
         taskArray.append(array2)
         taskArray.append(array3)

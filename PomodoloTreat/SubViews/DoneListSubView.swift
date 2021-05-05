@@ -57,7 +57,7 @@ struct DoneListSubView_Previews: PreviewProvider {
     var task:TaskModel
 
     static var previews: some View {
-        DoneListSubView(task: TaskModel(title: "aaa", motivation: 70, start_time: "00:00", end_time: "00:00"))
+        DoneListSubView(task: TaskModel(title: "aaa", memo:"いっぱい読んだ", motivation: 70, start_time: "00:00", end_time: "00:00"))
             .previewLayout(.sizeThatFits)
     }
 }

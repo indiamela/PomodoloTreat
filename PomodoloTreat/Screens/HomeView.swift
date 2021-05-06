@@ -10,11 +10,10 @@ import SwiftUI
 struct HomeView: View {
     
         @Environment(\.managedObjectContext) private var viewContext
-    
         @FetchRequest(
-            sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+            sortDescriptors: [NSSortDescriptor(keyPath: \TaskEntity.start_time, ascending: true)],
             animation: .default)
-        private var items: FetchedResults<Item>
+        private var tasks: FetchedResults<TaskEntity>
 
     @ObservedObject var timerManager = TimerManager()
 
@@ -50,7 +49,8 @@ struct HomeView: View {
                                 .frame(width: 20)
                                 .foregroundColor(Color.MyTheme.whiteColor)
                             Spacer()
-                            Image(systemName: "square.and.arrow.up")                                .resizable()
+                            Image(systemName: "square.and.arrow.up")
+                                .resizable()
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 20)
@@ -144,12 +144,31 @@ struct HomeView: View {
         .navigationBarHidden(true)
     }
     func getTask(){
-        let array1 = TaskModel(title: "読書",memo: "いっぱい読んだ", motivation: 70, start_time: "12:00", end_time: "12:25")
-        let array2 = TaskModel(title: "映画",memo: "いっぱいみた", motivation: 50, start_time: "13:00", end_time: "13:25")
-        let array3 = TaskModel(title: "勉強",memo: "いっぱい勉強した", motivation: 80, start_time: "14:00", end_time: "14:25")
-        taskArray.append(array1)
-        taskArray.append(array2)
-        taskArray.append(array3)
+//        let array1 = TaskModel(title: "読書",memo: "いっぱい読んだ", motivation: 70, start_time: "12:00", end_time: "12:25")
+//        let array2 = TaskModel(title: "映画",memo: "いっぱいみた", motivation: 50, start_time: "13:00", end_time: "13:25")
+//        let array3 = TaskModel(title: "勉強",memo: "いっぱい勉強した", motivation: 80, start_time: "14:00", end_time: "14:25")
+//        taskArray.append(array1)
+//        taskArray.append(array2)
+//        taskArray.append(array3)
+        TaskEntity.create(in: viewContext,
+                          title: "読書",
+                          memo: "いっぱい読んだ",
+                          start_time: "12:00",
+                          end_time: "12:25"
+                          )
+        TaskEntity.create(in: viewContext,
+                          title: "映画",
+                          memo: "いっぱい見た",
+                          start_time: "13:00",
+                          end_time: "13:25"
+                          )
+
+        TaskEntity.create(in: viewContext,
+                          title: "勉強",
+                          memo: "いっぱい勉強した",
+                          start_time: "14:00",
+                          end_time: "14:25"
+                          )
     }
     func popupNew(){
         //タイマーが0になったら新規作成モーダルを表示

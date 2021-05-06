@@ -14,6 +14,7 @@
 		F246831726400DC00060223A /* TreatSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246831626400DC00060223A /* TreatSubView.swift */; };
 		F246831B264110310060223A /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246831A264110310060223A /* TimerManager.swift */; };
 		F246831D26429AF90060223A /* CreateTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246831C26429AF90060223A /* CreateTaskView.swift */; };
+		F246831F264347F00060223A /* TaskEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246831E264347F00060223A /* TaskEntity.swift */; };
 		F2A2F1D6263EA07700FE4FEA /* PomodoloTreatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A2F1D5263EA07700FE4FEA /* PomodoloTreatApp.swift */; };
 		F2A2F1D8263EA07700FE4FEA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A2F1D7263EA07700FE4FEA /* ContentView.swift */; };
 		F2A2F1DA263EA07800FE4FEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2A2F1D9263EA07800FE4FEA /* Assets.xcassets */; };
@@ -53,6 +54,7 @@
 		F246831626400DC00060223A /* TreatSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreatSubView.swift; sourceTree = "<group>"; };
 		F246831A264110310060223A /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		F246831C26429AF90060223A /* CreateTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskView.swift; sourceTree = "<group>"; };
+		F246831E264347F00060223A /* TaskEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEntity.swift; sourceTree = "<group>"; };
 		F2A2F1D2263EA07700FE4FEA /* PomodoloTreat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomodoloTreat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2A2F1D5263EA07700FE4FEA /* PomodoloTreatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoloTreatApp.swift; sourceTree = "<group>"; };
 		F2A2F1D7263EA07700FE4FEA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				F2A2F214263F89C200FE4FEA /* TaskModel.swift */,
+				F246831E264347F00060223A /* TaskEntity.swift */,
 				F24683142640080C0060223A /* TreatModel.swift */,
 			);
 			name = Models;
@@ -334,6 +337,7 @@
 				F2A2F1D8263EA07700FE4FEA /* ContentView.swift in Sources */,
 				F246830F263FDD790060223A /* MultilineTextView.swift in Sources */,
 				F246831B264110310060223A /* TimerManager.swift in Sources */,
+				F246831F264347F00060223A /* TaskEntity.swift in Sources */,
 				F2A2F1D6263EA07700FE4FEA /* PomodoloTreatApp.swift in Sources */,
 				F2A2F215263F89C200FE4FEA /* TaskModel.swift in Sources */,
 				F2A2F1E2263EA07800FE4FEA /* PomodoloTreat.xcdatamodeld in Sources */,

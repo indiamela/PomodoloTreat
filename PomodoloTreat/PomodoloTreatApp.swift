@@ -13,7 +13,8 @@ struct PomodoloTreatApp: App {
     // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
     // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
 //    let persistenceController = PersistenceController.shared
-    lazy var persistentContainer: NSPersistentContainer = {
+//    @Environment(\.managedObjectContext) private var viewContext
+    var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name:"TaskEntity")
         container.loadPersistentStores(
             completionHandler: {(storeDescription,error) in
@@ -25,7 +26,7 @@ struct PomodoloTreatApp: App {
         return container
     }()
     
-    mutating func saveContext(){
+    func saveContext(){
         let context = persistentContainer.viewContext
         if context.hasChanges{
             do{
@@ -41,6 +42,7 @@ struct PomodoloTreatApp: App {
         WindowGroup {
             NavigationView{
                 ContentView()
+//                    .environment(\.managedObjectContext, persistentContainer.viewContext)
             }
 //            ContentView()
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)

@@ -97,15 +97,17 @@ struct HomeView: View {
                 .frame(height:350)
                 
                 //MARK:LIST -
-                ScrollView{
-                    LazyVStack{
-                        ForEach(taskArray,id:\.self){ task in
-                            DoneListSubView(task: task)
-                                .onTapGesture {
-                                    array = task
-                                    showDetail.toggle()
-                                }
+                VStack{
+                    List{
+                        ForEach(tasks){ task in
+//                            DoneListSubView(task: task)
+                            Text(task.title ?? "")
+//                                .onTapGesture {
+//                                    array = task
+//                                    showDetail.toggle()
+//                                }
                         }
+                        .onDelete(perform: deleteTask)
                     }
                 }
                 .offset(y:-30)
@@ -127,6 +129,9 @@ struct HomeView: View {
                         TaskDetailView(taskArray: $array)
                     }else{
                         CreateTaskView(start_time: "12:00", end_time: "12:25")
+                            .onAppear(perform: {
+                                addItem()
+                            })
                     }
                 }
                 .opacity(self.opacity)
@@ -143,13 +148,7 @@ struct HomeView: View {
         })
         .navigationBarHidden(true)
     }
-    func getTask(){
-//        let array1 = TaskModel(title: "読書",memo: "いっぱい読んだ", motivation: 70, start_time: "12:00", end_time: "12:25")
-//        let array2 = TaskModel(title: "映画",memo: "いっぱいみた", motivation: 50, start_time: "13:00", end_time: "13:25")
-//        let array3 = TaskModel(title: "勉強",memo: "いっぱい勉強した", motivation: 80, start_time: "14:00", end_time: "14:25")
-//        taskArray.append(array1)
-//        taskArray.append(array2)
-//        taskArray.append(array3)
+    func getTask(){        
         TaskEntity.create(in: viewContext,
                           title: "読書",
                           memo: "いっぱい読んだ",
@@ -173,6 +172,30 @@ struct HomeView: View {
     func popupNew(){
         //タイマーが0になったら新規作成モーダルを表示
     }
+    func deleteAll(){
+        tasks.forEach(viewContext.delete)
+    }
+    func addItem() {
+        let newTask = TaskEntity(context: viewContext)
+        newTask.title = "勉強"
+        newTask.memo = "いっぱい勉強した"
+        newTask.start_time = "14:00"
+        newTask.end_time = "14:25"
+        withAnimation {
+            do {
+                try viewContext.save()
+            } catch {
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        }
+    }
+    func deleteTask(offsets: IndexSet){
+        withAnimation{
+            offsets.map{tasks[$0]}.forEach(viewContext.delete)
+        }
+    }
+
     
 }
 

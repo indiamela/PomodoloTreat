@@ -10,10 +10,7 @@ import CoreData
 
 @main
 struct PomodoloTreatApp: App {
-    // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
-    // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
-    let persistenceController = PersistenceController.shared
-//    @Environment(\.managedObjectContext) private var viewContext
+    let persistenceController = PersistenceController.preview
 
     var body: some Scene {
         WindowGroup {

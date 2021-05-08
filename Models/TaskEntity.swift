@@ -6,15 +6,17 @@
 //
 
 import Foundation
+import SwiftUI
 import CoreData
 
 extension TaskEntity{
     static func create(in managedObjectContext: NSManagedObjectContext,
+                       id:String = UUID().uuidString,
                        title: String = "",
                        memo: String = "",
                        motivation: Double = 0.0,
-                       start_time: String = "00:00",
-                       end_time: String = "00:00"
+                       start_time: Date = Date(),
+                       end_time: Date = Date()
     ){
         let newTask = self.init(context: managedObjectContext)
         newTask.id = UUID().uuidString
@@ -23,18 +25,20 @@ extension TaskEntity{
         newTask.motivation = motivation
         newTask.start_time = start_time
         newTask.end_time = end_time
-        do {
-            try managedObjectContext.save()
-        }catch{
-            let nserror = error as NSError
-            fatalError("error\(nserror),\(nserror.userInfo)")
+        withAnimation {
+            do {
+                try managedObjectContext.save()
+            }catch{
+                let nserror = error as NSError
+                fatalError("error\(nserror),\(nserror.userInfo)")
+            }
         }
     }
 }
 
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
+//private let itemFormatter: DateFormatter = {
+//    let formatter = DateFormatter()
+//    formatter.dateStyle = .short
+//    formatter.timeStyle = .medium
+//    return formatter
+//}()

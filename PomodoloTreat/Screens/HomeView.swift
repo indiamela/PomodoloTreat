@@ -8,23 +8,20 @@
 import SwiftUI
 
 struct HomeView: View {
-//
-        @Environment(\.managedObjectContext) private var viewContext
-        @FetchRequest(
-            sortDescriptors: [NSSortDescriptor(keyPath: \TaskEntity.start_time, ascending: true)],
-            animation: .default)
-        private var tasks: FetchedResults<TaskEntity>
-
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \TaskEntity.start_time, ascending: true)],
+        animation: .default)
+    private var tasks: FetchedResults<TaskEntity>
+    
     @ObservedObject var timerManager = TimerManager()
-
+    
     var toDate = Calendar.current.date(byAdding:.hour,value:1,to:Date())
     
     @State var taskArray = [TaskModel]()
     @State var array:TaskModel = TaskModel(title: "",memo: "", motivation: 0.0, start_time: "", end_time: "")
     @State var showDetail = false
     @State var opacity = 0.0
-    var start_time = "12:00"
-    var end_time = "12:00"
     let availableMinutes = Array(1...59)
 
     var body: some View {
@@ -129,9 +126,6 @@ struct HomeView: View {
                         TaskDetailView(taskArray: $array)
                     }else{
                         CreateTaskView(start_time: "12:00", end_time: "12:25")
-                            .onAppear(perform: {
-                                addItem()
-                            })
                     }
                 }
                 .opacity(self.opacity)
@@ -143,30 +137,15 @@ struct HomeView: View {
                 }
             }
         }
-        .onAppear(perform: {
-            getTask()
-        })
         .navigationBarHidden(true)
     }
-    func getTask(){        
+    func getTask(){
         TaskEntity.create(in: viewContext,
+                          id: UUID().uuidString,
                           title: "読書",
                           memo: "いっぱい読んだ",
-                          start_time: "12:00",
-                          end_time: "12:25"
-                          )
-        TaskEntity.create(in: viewContext,
-                          title: "映画",
-                          memo: "いっぱい見た",
-                          start_time: "13:00",
-                          end_time: "13:25"
-                          )
-
-        TaskEntity.create(in: viewContext,
-                          title: "勉強",
-                          memo: "いっぱい勉強した",
-                          start_time: "14:00",
-                          end_time: "14:25"
+                          start_time: Date(),
+                          end_time: Date()
                           )
     }
     func popupNew(){
@@ -174,21 +153,6 @@ struct HomeView: View {
     }
     func deleteAll(){
         tasks.forEach(viewContext.delete)
-    }
-    func addItem() {
-        let newTask = TaskEntity(context: viewContext)
-        newTask.title = "勉強"
-        newTask.memo = "いっぱい勉強した"
-        newTask.start_time = "14:00"
-        newTask.end_time = "14:25"
-        withAnimation {
-            do {
-                try viewContext.save()
-            } catch {
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
     }
     func deleteTask(offsets: IndexSet){
         withAnimation{

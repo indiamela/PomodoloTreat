@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct DoneListSubView: View {
-//    var number:Int
-//    var title:String
-//    var motivation:Int
-//    var start_time:String
-//    var end_time:String
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \TaskEntity.start_time, ascending: true)],
+        animation: .default)
+    private var tasks: FetchedResults<TaskEntity>
     var task:TaskModel
     
     var body: some View {

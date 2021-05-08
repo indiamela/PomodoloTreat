@@ -95,10 +95,9 @@ struct HomeView: View {
                 
                 //MARK:LIST -
                 VStack{
-                    List{
-                        ForEach(tasks){ task in
-//                            DoneListSubView(task: task)
-                            Text(task.title ?? "")
+                    LazyVStack{
+                        ForEach(tasks ,id:\.self){ task in
+                            DoneListSubView(task: task)
 //                                .onTapGesture {
 //                                    array = task
 //                                    showDetail.toggle()
@@ -159,8 +158,6 @@ struct HomeView: View {
             offsets.map{tasks[$0]}.forEach(viewContext.delete)
         }
     }
-
-    
 }
 
 struct HomeView_Previews: PreviewProvider {

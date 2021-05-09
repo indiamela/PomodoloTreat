@@ -16,16 +16,13 @@ struct HomeView: View {
     
     @ObservedObject var timerManager = TimerManager()
     
-    var toDate = Calendar.current.date(byAdding:.hour,value:1,to:Date())
-    
-    @State var taskArray = [TaskModel]()
-    @State var array = TaskEntity()
+    @State var detailArray = TaskEntity()
+    @State var newArray = TaskEntity()
     @State var showDetail = false
     @State var opacity = 0.0
-    let availableMinutes = Array(1...59)
     @State var showAllert = false
+    let availableMinutes = Array(1...59)
     var indexSet:IndexSet?
-    @State var onDelete = false
 
 
     var body: some View {
@@ -103,95 +100,99 @@ struct HomeView: View {
                         ForEach(tasks ,id:\.self){ task in
                             DoneListSubView(task: task)
                                 .onTapGesture {
-                                    array = task
                                     showDetail = true
                                 }
+                                .sheet(isPresented: $showDetail, content: {
+                                    TaskDetailView(taskArray: task, isPresented: $showDetail)
+                                })
                         }
                         .onDelete(perform: deleteTask)
                     }
                     .frame(height:450)
+
                     Spacer()
                 }
                 .offset(y:-30)
             }
             
+            
             //MARK: DetailView
-            if showDetail || timerManager.timeFinish{
-                ZStack{
-                    //Rectangle
-                    Rectangle()
-                        .fill(Color.gray)
-                        .opacity(0.7)
-                        .edgesIgnoringSafeArea(.all)
-                        .onTapGesture {
-                            showDetail = false
-                            self.opacity = 0
-                        }
-                        .opacity(0.8)
-                //詳細画面開いていたら
-                    if showDetail && !self.timerManager.timeFinish {
-                        VStack{
-                            TaskDetailView(taskArray: array)
-                            Button(action: {
-                                self.showAllert = true
-                            }, label: {
-                                HStack{
-                                    Image(systemName: "trash")
-                                    Text("Delete")
-                                }
-                                .frame(width: 335,height: 50)
-                                .background(Color.MyTheme.redColor)
-                                .foregroundColor(Color.MyTheme.whiteColor)
-                                .cornerRadius(20)
-                                .padding()
-                            })
-                            .alert(isPresented: $showAllert, content: {
-                                Alert(title: Text("削除しますか"), primaryButton: .destructive(Text("削除"),action: {
-                                                                                                        self.showDetail = false
-                                                                                                        deleteTask(task: array)
-                                    
-                                }), secondaryButton: .cancel())
-                            })
-                        }
-                    }else{
-                        VStack{
-                            CreateTaskView(start_time: "12:00", end_time: "12:25")
-
-                            Button(action: {
-                                timerManager.timeFinish = false
-                                createTask()
-                            }, label: {
-                                HStack{
-                                    Image(systemName: "plus.circle.fill")
-                                    Text("Complete!")
-                                }
-                                .frame(width: 335,height: 50)
-                                .background(Color.MyTheme.blueColor)
-                                .foregroundColor(Color.MyTheme.whiteColor)
-                                .cornerRadius(20)
-                                .padding()
-                            })
-                        }
-                    }
-                    
-                }
-                .opacity(self.opacity)
-                .onAppear {
-                    withAnimation(.linear(duration: 0.3)) {
-                        // NOTE: opacityを変更する画面再描画に対してアニメーションを行う
-                        self.opacity = 1.0
-                    }
-                }
-            }
+//            if showDetail || timerManager.timeFinish{
+//                ZStack{
+//                    //Rectangle
+//                    Rectangle()
+//                        .fill(Color.gray)
+//                        .opacity(0.7)
+//                        .edgesIgnoringSafeArea(.all)
+//                        .onTapGesture {
+//                            showDetail = false
+//                            self.opacity = 0
+//                        }
+//                        .opacity(0.8)
+//                //詳細画面開いていたら
+//                    if showDetail && !self.timerManager.timeFinish {
+//                        VStack{
+//                            TaskDetailView(taskArray: detailArray)
+//                            Button(action: {
+//                                self.showAllert = true
+//                            }, label: {
+//                                HStack{
+//                                    Image(systemName: "trash")
+//                                    Text("Delete")
+//                                }
+//                                .frame(width: 335,height: 50)
+//                                .background(Color.MyTheme.redColor)
+//                                .foregroundColor(Color.MyTheme.whiteColor)
+//                                .cornerRadius(20)
+//                                .padding()
+//                            })
+//                            .alert(isPresented: $showAllert, content: {
+//                                Alert(title: Text("削除しますか"), primaryButton: .destructive(Text("削除"),action: {
+//                                                                                                        self.showDetail = false
+//                                                                                                        deleteTask(task: detailArray)
+//
+//                                }), secondaryButton: .cancel())
+//                            })
+//                        }
+//                    }else{
+//                        VStack{
+//                            CreateTaskView(newTask: <#T##TaskEntity#>)
+//
+//                            Button(action: {
+//                                timerManager.timeFinish = false
+//                            }, label: {
+//                                HStack{
+//                                    Image(systemName: "plus.circle.fill")
+//                                    Text("Complete!")
+//                                }
+//                                .frame(width: 335,height: 50)
+//                                .background(Color.MyTheme.blueColor)
+//                                .foregroundColor(Color.MyTheme.whiteColor)
+//                                .cornerRadius(20)
+//                                .padding()
+//                            })
+//                        }
+//                        .onAppear(perform: {
+//                            createTask()
+//                        })
+//                    }
+//
+//                }
+//                .opacity(self.opacity)
+//                .onAppear {
+//                    withAnimation(.linear(duration: 0.3)) {
+//                        // NOTE: opacityを変更する画面再描画に対してアニメーションを行う
+//                        self.opacity = 1.0
+//                    }
+//                }
+//            }
         }
         .navigationBarHidden(true)
+        
     }
     func createTask(){
         TaskEntity.create(in: viewContext,
                           id: UUID().uuidString,
-                          title: "筋トレ",
-                          memo: "めっちゃくちゃハードに頑張った！",
-                          motivation: 60,
                           start_time: Date(),
                           end_time: Date()
                           )

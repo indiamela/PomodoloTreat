@@ -14,12 +14,10 @@ struct TaskDetailView: View {
         animation: .default)
     private var tasks: FetchedResults<TaskEntity>
     @ObservedObject var taskArray:TaskEntity
+    @Binding var isPresented:Bool
     @State var showAllert = false
     
     var body: some View {
-        ZStack{
-//            Color.clear
-//                .edgesIgnoringSafeArea(.all)
             VStack{
                 //Title
                 HStack{
@@ -112,29 +110,40 @@ struct TaskDetailView: View {
                 })
                 .padding(.vertical,20)
                 .padding(.horizontal,20)
-//                Button(action: {
-//                    self.showAllert = true
-//                }, label: {
-//                    Image("Delete")
-//                        .frame(width: 335)
-//                })
-//                .alert(isPresented: $showAllert, content: {
-//                    Alert(title: Text("削除しますか"), primaryButton: .destructive(Text("削除"),action: deleteTask), secondaryButton: .cancel())
-//                })
-                
+                Spacer()
+                Button(action: {
+                    self.showAllert = true
+                }, label: {
+                    HStack{
+                        Image(systemName: "trash")
+                        Text("Delete")
+                    }
+                    .frame(width: 335,height: 50)
+                    .background(Color.MyTheme.redColor)
+                    .foregroundColor(Color.MyTheme.whiteColor)
+                    .cornerRadius(20)
+                    .padding()
+                })
+                .alert(isPresented: $showAllert, content: {
+                    Alert(title: Text("削除しますか"), primaryButton: .destructive(Text("削除"),action: {
+                        deleteTask()
+                    }), secondaryButton: .cancel())
+                })
             }
-            .frame(width: 335)
+            .padding()
             .background(Color.MyTheme.whiteColor)
             .cornerRadius(20)
-        }
+            .edgesIgnoringSafeArea(.all)
     }
     func deleteTask(){
         tasks.filter{$0.id == taskArray.id}.forEach(viewContext.delete)
+        isPresented = false
     }
 }
 
 struct TaskDetailView_Previews: PreviewProvider {
-    @State static var array:TaskModel = TaskModel(title: "読書",memo:"いっぱい読んだ", motivation: 70, start_time: "12:00", end_time: "12:25")
+
+    @State static var isPresented = true
     static var previews: some View {
         let context = PersistenceController.shared.container.viewContext
         let task = TaskEntity(context: context)
@@ -144,7 +153,7 @@ struct TaskDetailView_Previews: PreviewProvider {
         task.end_time = Date()
         task.motivation = 60
         task.id = UUID().uuidString
-        return TaskDetailView(taskArray: task)
-                    .previewLayout(.sizeThatFits)
+        return TaskDetailView(taskArray: task,isPresented:$isPresented)
+//                    .previewLayout(.sizeThatFits)
     }
 }

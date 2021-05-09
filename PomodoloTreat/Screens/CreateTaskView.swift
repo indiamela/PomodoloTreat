@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct CreateTaskView: View {
-    var start_time: String = "12:00"
-    var end_time: String = "12:25"
-    @State var taskArray = [TaskModel]()
+    @Environment(\.managedObjectContext) private var viewContext
+//    @ObservedObject var newTask:TaskEntity
+    @State var start_time:Date?
+    @State var end_time:Date?
     @State var motivation: Double = 50
     @State var memo: String = ""
     @State var title:String = ""
@@ -31,8 +32,7 @@ struct CreateTaskView: View {
                 HStack(){
                     Image("calendar")
                     //3rd Feb
-                    Text("\(start_time)-\(end_time)")
-                        .font(.custom("Roboto Medium", size: 14))
+                    Text("\(timeText().start(start_time: Date()))-\(timeText().end(start_time: Date(), minute: 20))")                        .font(.custom("Roboto Medium", size: 14))
                     Spacer()
                 }
                 .padding(.top,10)

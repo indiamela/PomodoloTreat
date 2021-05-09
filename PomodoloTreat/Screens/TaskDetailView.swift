@@ -19,6 +19,7 @@ struct TaskDetailView: View {
     
     var body: some View {
             VStack{
+                Spacer()
                 //Title
                 HStack{
                     Text(taskArray.title!)

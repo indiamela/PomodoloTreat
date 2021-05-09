@@ -19,10 +19,12 @@ struct HomeView: View {
     @State var detailArray = TaskEntity()
     @State var newArray = TaskEntity()
     @State var showDetail = false
+    @State var showNewTask = false
     @State var opacity = 0.0
     @State var showAllert = false
+    @State var startTime = Date()
+    @State var timeFinish = TimerManager().$timeFinish
     let availableMinutes = Array(1...59)
-    var indexSet:IndexSet?
 
 
     var body: some View {
@@ -67,7 +69,6 @@ struct HomeView: View {
 
                         
                         //start
-                        //-background
                         Image(systemName: timerManager.timerMode == .running ? "pause.circle.fill" : "play.circle.fill")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
@@ -76,6 +77,7 @@ struct HomeView: View {
                             .shadow(color: Color.gray, radius:5, x:5, y:5)
                             .onTapGesture(perform: {
                                 if self.timerManager.timerMode == .initial {
+                                    self.startTime = Date()
                                     self.timerManager.setTimerLength(minutes: self.availableMinutes[0]*3)
                                 }
                                 self.timerManager.timerMode == .running ? self.timerManager.pause() : self.timerManager.start()
@@ -113,89 +115,13 @@ struct HomeView: View {
                     Spacer()
                 }
                 .offset(y:-30)
+//                NavigationLink("", destination: self.availableMinutes[0]*3)
+//                if self.timerManager.timeFinish{
+//                }
             }
-            
-            
-            //MARK: DetailView
-//            if showDetail || timerManager.timeFinish{
-//                ZStack{
-//                    //Rectangle
-//                    Rectangle()
-//                        .fill(Color.gray)
-//                        .opacity(0.7)
-//                        .edgesIgnoringSafeArea(.all)
-//                        .onTapGesture {
-//                            showDetail = false
-//                            self.opacity = 0
-//                        }
-//                        .opacity(0.8)
-//                //詳細画面開いていたら
-//                    if showDetail && !self.timerManager.timeFinish {
-//                        VStack{
-//                            TaskDetailView(taskArray: detailArray)
-//                            Button(action: {
-//                                self.showAllert = true
-//                            }, label: {
-//                                HStack{
-//                                    Image(systemName: "trash")
-//                                    Text("Delete")
-//                                }
-//                                .frame(width: 335,height: 50)
-//                                .background(Color.MyTheme.redColor)
-//                                .foregroundColor(Color.MyTheme.whiteColor)
-//                                .cornerRadius(20)
-//                                .padding()
-//                            })
-//                            .alert(isPresented: $showAllert, content: {
-//                                Alert(title: Text("削除しますか"), primaryButton: .destructive(Text("削除"),action: {
-//                                                                                                        self.showDetail = false
-//                                                                                                        deleteTask(task: detailArray)
-//
-//                                }), secondaryButton: .cancel())
-//                            })
-//                        }
-//                    }else{
-//                        VStack{
-//                            CreateTaskView(newTask: <#T##TaskEntity#>)
-//
-//                            Button(action: {
-//                                timerManager.timeFinish = false
-//                            }, label: {
-//                                HStack{
-//                                    Image(systemName: "plus.circle.fill")
-//                                    Text("Complete!")
-//                                }
-//                                .frame(width: 335,height: 50)
-//                                .background(Color.MyTheme.blueColor)
-//                                .foregroundColor(Color.MyTheme.whiteColor)
-//                                .cornerRadius(20)
-//                                .padding()
-//                            })
-//                        }
-//                        .onAppear(perform: {
-//                            createTask()
-//                        })
-//                    }
-//
-//                }
-//                .opacity(self.opacity)
-//                .onAppear {
-//                    withAnimation(.linear(duration: 0.3)) {
-//                        // NOTE: opacityを変更する画面再描画に対してアニメーションを行う
-//                        self.opacity = 1.0
-//                    }
-//                }
-//            }
         }
         .navigationBarHidden(true)
         
-    }
-    func createTask(){
-        TaskEntity.create(in: viewContext,
-                          id: UUID().uuidString,
-                          start_time: Date(),
-                          end_time: Date()
-                          )
     }
     func popupNew(){
         //タイマーが0になったら新規作成モーダルを表示

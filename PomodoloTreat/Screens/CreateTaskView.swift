@@ -16,9 +16,6 @@ struct CreateTaskView: View {
     @State var title:String = ""
     
     var body: some View {
-        ZStack{
-            Color.clear
-                .edgesIgnoringSafeArea(.all)
             VStack{
                 //Title
                 HStack{
@@ -108,25 +105,17 @@ struct CreateTaskView: View {
                 })
                 .padding(.vertical,20)
                 .padding(.horizontal,20)
-                Button(action: {
-                    let array = TaskModel(title: title,memo: memo, motivation: motivation, start_time: start_time, end_time: end_time)
-                    taskArray.append(array)
-                }, label: {
-                    Image("createButton")
-                        .frame(width: 335)
-                })
             }
-            .frame(width: 335)
-            .background(Color.MyTheme.whiteColor)
-            .cornerRadius(20)
-            .overlay(
-                Image("pc")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 130)
-                    .position(x:300,y:0)
-                )
-        }
+//            .overlay(
+//                Image("pc")
+//                    .resizable()
+//                    .scaledToFit()
+//                    .frame(width: 130)
+//                    .position(x:300,y:0)
+//                )
+        .frame(width: 335)
+        .background(Color.MyTheme.whiteColor)
+        .cornerRadius(20)
     }
 }
 

@@ -99,7 +99,7 @@ struct HomeView: View {
                 
                 //MARK:LIST -
                 VStack{
-                    LazyVStack{
+                    ScrollView{
                         ForEach(tasks ,id:\.self){ task in
                             DoneListSubView(task: task)
                                 .onTapGesture {
@@ -109,10 +109,13 @@ struct HomeView: View {
                         }
                         .onDelete(perform: deleteTask)
                     }
+                    .frame(height:450)
                     Spacer()
                 }
                 .offset(y:-30)
             }
+            
+            //MARK: DetailView
             if showDetail || timerManager.timeFinish{
                 ZStack{
                     //Rectangle
@@ -151,8 +154,26 @@ struct HomeView: View {
                             })
                         }
                     }else{
-                        CreateTaskView(start_time: "12:00", end_time: "12:25")
+                        VStack{
+                            CreateTaskView(start_time: "12:00", end_time: "12:25")
+
+                            Button(action: {
+                                timerManager.timeFinish = false
+                                createTask()
+                            }, label: {
+                                HStack{
+                                    Image(systemName: "plus.circle.fill")
+                                    Text("Complete!")
+                                }
+                                .frame(width: 335,height: 50)
+                                .background(Color.MyTheme.blueColor)
+                                .foregroundColor(Color.MyTheme.whiteColor)
+                                .cornerRadius(20)
+                                .padding()
+                            })
+                        }
                     }
+                    
                 }
                 .opacity(self.opacity)
                 .onAppear {
@@ -165,11 +186,12 @@ struct HomeView: View {
         }
         .navigationBarHidden(true)
     }
-    func getTask(){
+    func createTask(){
         TaskEntity.create(in: viewContext,
                           id: UUID().uuidString,
-                          title: "読書",
-                          memo: "いっぱい読んだ",
+                          title: "筋トレ",
+                          memo: "めっちゃくちゃハードに頑張った！",
+                          motivation: 60,
                           start_time: Date(),
                           end_time: Date()
                           )

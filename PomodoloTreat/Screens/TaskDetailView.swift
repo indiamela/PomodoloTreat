@@ -8,20 +8,22 @@
 import SwiftUI
 
 struct TaskDetailView: View {
-    @Binding var taskArray:TaskModel
-    @State var motivation: Double = 0
-    @State var detailText: String = ""
-//    @Binding var title:String
-//    @Binding var array:TaskModel
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \TaskEntity.start_time, ascending: true)],
+        animation: .default)
+    private var tasks: FetchedResults<TaskEntity>
+    @ObservedObject var taskArray:TaskEntity
+    @State var showAllert = false
     
     var body: some View {
         ZStack{
-            Color.clear
-                .edgesIgnoringSafeArea(.all)
+//            Color.clear
+//                .edgesIgnoringSafeArea(.all)
             VStack{
                 //Title
                 HStack{
-                    Text(taskArray.title)
+                    Text(taskArray.title!)
                         .font(.title)
                         .shadow(color: Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)), radius:4, x:0, y:4)
                     Spacer()
@@ -33,7 +35,8 @@ struct TaskDetailView: View {
                 HStack(){
                     Image("calendar")
                     //3rd Feb
-                    Text("\(taskArray.start_time)-\(taskArray.end_time)").font(.custom("Roboto Medium", size: 14))
+                    Text("\(timeText().start(start_time: Date()))-\(timeText().end(start_time: Date(), minute: 20))")
+                        .font(.custom("Roboto Medium", size: 14))
                     Spacer()
                 }
                 .padding(.top,10)
@@ -47,6 +50,7 @@ struct TaskDetailView: View {
                             .mask(Slider(value: $taskArray.motivation,in: 0...100, step:1))
                         Slider(value: $taskArray.motivation,in: 0...100, step:1)
                             .opacity(0.05)
+
                     }
                     HStack{
                         Image("sad")
@@ -66,7 +70,7 @@ struct TaskDetailView: View {
                             .font(.caption)
                         Spacer()
                     }
-                    Text(taskArray.memo)
+                    Text(taskArray.memo!)
                         .frame(height: 70)
                 }
                 .padding(.top,20)
@@ -108,13 +112,15 @@ struct TaskDetailView: View {
                 })
                 .padding(.vertical,20)
                 .padding(.horizontal,20)
-                Button(action: {
-                    //showAlart
-                    //delete task
-                }, label: {
-                    Image("Delete")
-                        .frame(width: 335)
-                })
+//                Button(action: {
+//                    self.showAllert = true
+//                }, label: {
+//                    Image("Delete")
+//                        .frame(width: 335)
+//                })
+//                .alert(isPresented: $showAllert, content: {
+//                    Alert(title: Text("削除しますか"), primaryButton: .destructive(Text("削除"),action: deleteTask), secondaryButton: .cancel())
+//                })
                 
             }
             .frame(width: 335)
@@ -122,12 +128,23 @@ struct TaskDetailView: View {
             .cornerRadius(20)
         }
     }
+    func deleteTask(){
+        tasks.filter{$0.id == taskArray.id}.forEach(viewContext.delete)
+    }
 }
 
 struct TaskDetailView_Previews: PreviewProvider {
     @State static var array:TaskModel = TaskModel(title: "読書",memo:"いっぱい読んだ", motivation: 70, start_time: "12:00", end_time: "12:25")
     static var previews: some View {
-        TaskDetailView(taskArray: $array)
-        //            .previewLayout(.sizeThatFits)
+        let context = PersistenceController.shared.container.viewContext
+        let task = TaskEntity(context: context)
+        task.title = "読書"
+        task.memo = "おもしろかった"
+        task.start_time = Date()
+        task.end_time = Date()
+        task.motivation = 60
+        task.id = UUID().uuidString
+        return TaskDetailView(taskArray: task)
+                    .previewLayout(.sizeThatFits)
     }
 }

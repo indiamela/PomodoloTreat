@@ -19,10 +19,14 @@ struct HomeView: View {
     var toDate = Calendar.current.date(byAdding:.hour,value:1,to:Date())
     
     @State var taskArray = [TaskModel]()
-    @State var array:TaskModel = TaskModel(title: "",memo: "", motivation: 0.0, start_time: "", end_time: "")
+    @State var array = TaskEntity()
     @State var showDetail = false
     @State var opacity = 0.0
     let availableMinutes = Array(1...59)
+    @State var showAllert = false
+    var indexSet:IndexSet?
+    @State var onDelete = false
+
 
     var body: some View {
         ZStack{
@@ -98,13 +102,14 @@ struct HomeView: View {
                     LazyVStack{
                         ForEach(tasks ,id:\.self){ task in
                             DoneListSubView(task: task)
-//                                .onTapGesture {
-//                                    array = task
-//                                    showDetail.toggle()
-//                                }
+                                .onTapGesture {
+                                    array = task
+                                    showDetail = true
+                                }
                         }
                         .onDelete(perform: deleteTask)
                     }
+                    Spacer()
                 }
                 .offset(y:-30)
             }
@@ -122,7 +127,29 @@ struct HomeView: View {
                         .opacity(0.8)
                 //詳細画面開いていたら
                     if showDetail && !self.timerManager.timeFinish {
-                        TaskDetailView(taskArray: $array)
+                        VStack{
+                            TaskDetailView(taskArray: array)
+                            Button(action: {
+                                self.showAllert = true
+                            }, label: {
+                                HStack{
+                                    Image(systemName: "trash")
+                                    Text("Delete")
+                                }
+                                .frame(width: 335,height: 50)
+                                .background(Color.MyTheme.redColor)
+                                .foregroundColor(Color.MyTheme.whiteColor)
+                                .cornerRadius(20)
+                                .padding()
+                            })
+                            .alert(isPresented: $showAllert, content: {
+                                Alert(title: Text("削除しますか"), primaryButton: .destructive(Text("削除"),action: {
+                                                                                                        self.showDetail = false
+                                                                                                        deleteTask(task: array)
+                                    
+                                }), secondaryButton: .cancel())
+                            })
+                        }
                     }else{
                         CreateTaskView(start_time: "12:00", end_time: "12:25")
                     }
@@ -150,20 +177,25 @@ struct HomeView: View {
     func popupNew(){
         //タイマーが0になったら新規作成モーダルを表示
     }
-    func deleteAll(){
-        tasks.forEach(viewContext.delete)
-    }
+
     func deleteTask(offsets: IndexSet){
         withAnimation{
             offsets.map{tasks[$0]}.forEach(viewContext.delete)
+        }
+    }
+    func deleteTask(task: TaskEntity){
+        withAnimation{
+            tasks.filter{$0.id == task.id}.forEach(viewContext.delete)
         }
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView{
+        let context = PersistenceController.preview.container.viewContext
+        return NavigationView{
             HomeView()
+                .environment(\.managedObjectContext, context)
         }
     }
 }

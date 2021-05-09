@@ -8,12 +8,7 @@
 import SwiftUI
 
 struct DoneListSubView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \TaskEntity.start_time, ascending: true)],
-        animation: .default)
-    private var tasks: FetchedResults<TaskEntity>
-    var task:TaskModel
+    @ObservedObject var task: TaskEntity
     
     var body: some View {
         ZStack{
@@ -31,7 +26,7 @@ struct DoneListSubView: View {
 //                HStack{
 //                    Text("\(String(count))")
 //                        .font(.title3)
-                    Text(task.title)
+                Text(task.title!)
                         .multilineTextAlignment(.leading)
 //                }
                 Spacer()
@@ -40,7 +35,7 @@ struct DoneListSubView: View {
                         Image("happy")
                         Text("\(Int(task.motivation))%")
                     }
-                    Text("\(task.start_time)-\(task.end_time)")
+                    Text("\(timeText().start(start_time: Date()))-\(timeText().end(start_time: Date(), minute: 20))")
                 }
                 .frame(width: 100)
             }
@@ -57,7 +52,15 @@ struct DoneListSubView_Previews: PreviewProvider {
     var task:TaskModel
 
     static var previews: some View {
-        DoneListSubView(task: TaskModel(title: "aaa", memo:"いっぱい読んだ", motivation: 70, start_time: "00:00", end_time: "00:00"))
+        let context = PersistenceController.shared.container.viewContext
+        let task = TaskEntity(context: context)
+        task.title = "読書"
+        task.memo = "おもしろかった"
+        task.start_time = Date()
+        task.end_time = Date()
+        task.motivation = 60
+        task.id = UUID().uuidString
+        return DoneListSubView(task:task)
             .previewLayout(.sizeThatFits)
     }
 }

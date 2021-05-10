@@ -23,7 +23,7 @@ struct HomeView: View {
     @State var opacity = 0.0
     @State var showAllert = false
     @State var startTime = Date()
-    @State var timeFinish = TimerManager().$timeFinish
+    @State var openSheet = TimerManager().$timeFinish
     let availableMinutes = Array(1...59)
 
 
@@ -66,7 +66,6 @@ struct HomeView: View {
                             .multilineTextAlignment(.center)
                             .textCase(.uppercase)
                             .shadow(color: Color.gray, radius:5, x:5, y:5)
-
                         
                         //start
                         Image(systemName: timerManager.timerMode == .running ? "pause.circle.fill" : "play.circle.fill")
@@ -114,6 +113,9 @@ struct HomeView: View {
 
                     Spacer()
                 }
+//                .sheet(isPresented: $openSheet, content: {
+//                    CreateTaskView(isPresented: $openSheet)
+//                })
                 .offset(y:-30)
 //                NavigationLink("", destination: self.availableMinutes[0]*3)
 //                if self.timerManager.timeFinish{

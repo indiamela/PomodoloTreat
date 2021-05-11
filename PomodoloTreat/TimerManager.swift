@@ -8,11 +8,17 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
 class TimerManager: ObservableObject {
-    
+    let ObjectWillChange = ObservableObjectPublisher()
     @Published var timerMode: TimerMode = .initial
-    @Published var timeFinish: Bool = false
+    var timeFinish = false{
+        //@Publishedでラップされたのを外す処理
+        willSet{
+            ObjectWillChange.send()
+        }
+    }
     @Published var secondsLeft = UserDefaults.standard.integer(forKey: "timerLength")
     
     var timer = Timer()

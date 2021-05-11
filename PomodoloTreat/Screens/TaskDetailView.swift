@@ -34,7 +34,7 @@ struct TaskDetailView: View {
                 HStack(){
                     Image("calendar")
                     //3rd Feb
-                    Text("\(timeText().start(start_time: Date()))-\(timeText().end(start_time: Date(), minute: 20))")
+                    Text("\(timeText().time(time: taskArray.start_time!))-\(timeText().time(time: taskArray.end_time!))")
                         .font(.custom("Roboto Medium", size: 14))
                     Spacer()
                 }

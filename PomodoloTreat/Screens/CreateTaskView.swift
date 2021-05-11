@@ -11,10 +11,11 @@ import SwiftUI
 
 struct CreateTaskView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.presentationMode) private var presentationMode
     @Binding var isPresented:Bool
-    @State var start_time:Date?
+    @Binding var start_time:Date
+    @Binding var end_time:Date
     @State var passedTime:Int?
-    @State var end_time:Date?
     @State var motivation: Double = 50
     @State var memo: String = ""
     @State var title:String = ""
@@ -33,12 +34,13 @@ struct CreateTaskView: View {
             .padding(.horizontal,20)
             
             //Date
-            HStack(){
-                Image("calendar")
                 //3rd Feb
-                Text("\(timeText().start(start_time: Date()))-\(timeText().end(start_time: Date(), minute: 20))")                        .font(.custom("Roboto Medium", size: 14))
-                Spacer()
-            }
+                HStack{
+//                    Image("calendar")
+                    DatePicker("START", selection: $start_time,displayedComponents:.hourAndMinute)
+                    DatePicker("FINISH", selection: $end_time,displayedComponents:.hourAndMinute)
+
+                }
             .padding(.top,10)
             .padding(.horizontal,20)
             
@@ -111,6 +113,8 @@ struct CreateTaskView: View {
             .padding(.horizontal,20)
             Spacer()
             Button(action: {
+                createTask()
+                self.presentationMode.wrappedValue.dismiss()
             }, label: {
                 HStack{
                     Image(systemName: "plus.circle.fill")
@@ -131,17 +135,20 @@ struct CreateTaskView: View {
     func createTask(){
         TaskEntity.create(in: viewContext,
                           id: UUID().uuidString,
-                          start_time: Date(),
-                          end_time: Date()
+                          title: title,
+                          memo: memo,
+                          motivation: motivation,
+                          start_time: start_time,
+                          end_time: end_time
                           )
     }
 }
 
 struct CreateTaskView_Previews: PreviewProvider {
-//    @State static var start_time:String = "12:00"
-//    @State static var end_time:String = "12:25"
+    @State static var start_time:Date = Date()
+    @State static var end_time:Date = Date().addingTimeInterval(25 * 60)
     @State static var isPresented = true
     static var previews: some View {
-        CreateTaskView(isPresented:$isPresented)
+        CreateTaskView(isPresented:$isPresented,start_time: $start_time,end_time: $end_time)
     }
 }

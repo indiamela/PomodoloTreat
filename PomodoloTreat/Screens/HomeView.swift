@@ -23,7 +23,8 @@ struct HomeView: View {
     @State var opacity = 0.0
     @State var showAllert = false
     @State var startTime = Date()
-    @State var openSheet = TimerManager().$timeFinish
+    @State var endTime = Date()
+    @State var passedTime = 60
     let availableMinutes = Array(1...59)
 
 
@@ -76,8 +77,10 @@ struct HomeView: View {
                             .shadow(color: Color.gray, radius:5, x:5, y:5)
                             .onTapGesture(perform: {
                                 if self.timerManager.timerMode == .initial {
-                                    self.startTime = Date()
-                                    self.timerManager.setTimerLength(minutes: self.availableMinutes[0]*3)
+                                    startTime = Date()
+                                    passedTime = self.availableMinutes[0]*3
+                                    endTime = startTime.addingTimeInterval(TimeInterval(passedTime))
+                                    self.timerManager.setTimerLength(minutes: self.passedTime)
                                 }
                                 self.timerManager.timerMode == .running ? self.timerManager.pause() : self.timerManager.start()
                             })
@@ -113,9 +116,9 @@ struct HomeView: View {
 
                     Spacer()
                 }
-//                .sheet(isPresented: $openSheet, content: {
-//                    CreateTaskView(isPresented: $openSheet)
-//                })
+                .sheet(isPresented: $timerManager.timeFinish, content: {
+                    CreateTaskView(isPresented:$timerManager.timeFinish,start_time: $startTime,end_time: $endTime)
+                })
                 .offset(y:-30)
 //                NavigationLink("", destination: self.availableMinutes[0]*3)
 //                if self.timerManager.timeFinish{

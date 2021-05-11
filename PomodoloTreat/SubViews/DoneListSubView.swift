@@ -35,7 +35,7 @@ struct DoneListSubView: View {
                         Image("happy")
                         Text("\(Int(task.motivation))%")
                     }
-                    Text("\(timeText().start(start_time: Date()))-\(timeText().end(start_time: Date(), minute: 20))")
+                    Text("\(timeText().time(time: task.start_time!))-\(timeText().time(time: task.end_time!))")
                 }
                 .frame(width: 100)
             }

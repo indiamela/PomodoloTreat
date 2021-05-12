@@ -19,6 +19,7 @@ struct CreateTaskView: View {
     @State var motivation: Double = 50
     @State var memo: String = ""
     @State var title:String = ""
+    var arr:[String] = []
     
     var body: some View {
         VStack{
@@ -141,6 +142,8 @@ struct CreateTaskView: View {
                           start_time: start_time,
                           end_time: end_time
                           )
+        print(start_time)
+        print(end_time)
     }
 }
 

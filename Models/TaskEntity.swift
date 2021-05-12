@@ -16,8 +16,7 @@ extension TaskEntity{
                        memo: String = "",
                        motivation: Double = 0.0,
                        start_time: Date = Date(),
-                       end_time: Date? = Date(),
-                       minute: Int? = 0
+                       end_time: Date = Date()
     ){
         let calendar = Calendar(identifier: .gregorian)
         
@@ -27,11 +26,7 @@ extension TaskEntity{
         newTask.memo = memo
         newTask.motivation = motivation
         newTask.start_time = start_time
-        if newTask.end_time != nil{
-            newTask.end_time = end_time
-        } else {
-            newTask.end_time = calendar.date(byAdding: DateComponents(minute: minute), to: start_time)!
-        }
+        newTask.end_time = end_time
         withAnimation {
             do {
                 try managedObjectContext.save()

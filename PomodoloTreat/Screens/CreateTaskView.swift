@@ -141,10 +141,7 @@ struct CreateTaskView: View {
                           motivation: motivation,
                           start_time: start_time,
                           end_time: end_time
-                          )
-        print(start_time)
-        print(end_time)
-    }
+                          )    }
 }
 
 struct CreateTaskView_Previews: PreviewProvider {

@@ -13,21 +13,21 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-//        for _ in 0..<6 {
-//            let newTask = TaskEntity(context: viewContext)
-//            newTask.id = UUID().uuidString
-//            newTask.title = "読書"
-//            newTask.memo = "いっぱい読んだ"
-//            newTask.motivation = 60
-//            newTask.start_time = Date()
-//            newTask.end_time = Date()
-//        }
-//        do {
-//            try viewContext.save()
-//        } catch {
-//            let nsError = error as NSError
-//            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-//        }
+        for _ in 0..<6 {
+            let newTask = TaskEntity(context: viewContext)
+            newTask.id = UUID().uuidString
+            newTask.title = "読書"
+            newTask.memo = "いっぱい読んだ"
+            newTask.motivation = 60
+            newTask.start_time = Date()
+            newTask.end_time = Date()
+        }
+        do {
+            try viewContext.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
         return result
     }()
 

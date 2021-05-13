@@ -78,7 +78,7 @@ struct HomeView: View {
                             .onTapGesture(perform: {
                                 if self.timerManager.timerMode == .initial {
                                     startTime = Date()
-                                    passedTime = self.availableMinutes[0]*3
+                                    passedTime = self.availableMinutes[0]*60
                                     endTime = startTime.addingTimeInterval(TimeInterval(passedTime))
                                     self.timerManager.setTimerLength(minutes: self.passedTime)
                                 }
@@ -120,16 +120,10 @@ struct HomeView: View {
                     CreateTaskView(isPresented:$timerManager.timeFinish,start_time: $startTime,end_time: $endTime)
                 })
                 .offset(y:-30)
-//                NavigationLink("", destination: self.availableMinutes[0]*3)
-//                if self.timerManager.timeFinish{
-//                }
             }
         }
         .navigationBarHidden(true)
         
-    }
-    func popupNew(){
-        //タイマーが0になったら新規作成モーダルを表示
     }
 
     func deleteTask(offsets: IndexSet){

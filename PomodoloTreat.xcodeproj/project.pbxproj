@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F22A60D4264DE1B300834F33 /* RewordEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A60D3264DE1B300834F33 /* RewordEntity.swift */; };
 		F246830D263FC1480060223A /* TaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246830C263FC1480060223A /* TaskDetailView.swift */; };
 		F246830F263FDD790060223A /* MultilineTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246830E263FDD790060223A /* MultilineTextView.swift */; };
 		F2468313263FFFD20060223A /* TreatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2468312263FFFD20060223A /* TreatView.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F22A60D3264DE1B300834F33 /* RewordEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewordEntity.swift; sourceTree = "<group>"; };
 		F246830C263FC1480060223A /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
 		F246830E263FDD790060223A /* MultilineTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextView.swift; sourceTree = "<group>"; };
 		F2468312263FFFD20060223A /* TreatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreatView.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				F2A2F214263F89C200FE4FEA /* TaskModel.swift */,
 				F246831E264347F00060223A /* TaskEntity.swift */,
 				F24683142640080C0060223A /* TreatModel.swift */,
+				F22A60D3264DE1B300834F33 /* RewordEntity.swift */,
 			);
 			name = Models;
 			path = ../Models;
@@ -342,6 +345,7 @@
 				F246830F263FDD790060223A /* MultilineTextView.swift in Sources */,
 				F246831B264110310060223A /* TimerManager.swift in Sources */,
 				F246831F264347F00060223A /* TaskEntity.swift in Sources */,
+				F22A60D4264DE1B300834F33 /* RewordEntity.swift in Sources */,
 				F2A2F1D6263EA07700FE4FEA /* PomodoloTreatApp.swift in Sources */,
 				F2A2F215263F89C200FE4FEA /* TaskModel.swift in Sources */,
 				F2A2F1E2263EA07800FE4FEA /* PomodoloTreat.xcdatamodeld in Sources */,

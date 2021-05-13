@@ -8,6 +8,12 @@
 import SwiftUI
 
 struct TreatView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \RewordEntity.title,
+                                           ascending: true)],
+        animation: .default)
+    private var rewords: FetchedResults<RewordEntity>
     @State var treatArray:[String] = ["aaaaaa","bbbbb"]
     @State var new = ""
     init(){
@@ -36,7 +42,7 @@ struct TreatView: View {
                         .shadow(color: Color.gray, radius:5, x:5, y:5)
 
                     Button(action: {
-                        treatArray.append(self.new)
+//                        treatArray.append(self.new)
                     }, label: {
                         Image(systemName: "plus.circle.fill")
                             .font(.system(size: 25, weight: .medium, design: .default))

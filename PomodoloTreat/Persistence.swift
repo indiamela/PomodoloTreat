@@ -22,6 +22,9 @@ struct PersistenceController {
             newTask.start_time = Date()
             newTask.end_time = Date()
         }
+        let newReword = RewordEntity(context: viewContext)
+        newReword.id = UUID().uuidString
+        newReword.title = "ナッツ3粒GET"
         do {
             try viewContext.save()
         } catch {

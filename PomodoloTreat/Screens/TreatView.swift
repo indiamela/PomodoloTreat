@@ -14,7 +14,6 @@ struct TreatView: View {
                                            ascending: true)],
         animation: .default)
     private var rewords: FetchedResults<RewordEntity>
-    @State var treatArray:[String] = ["aaaaaa","bbbbb"]
     @State var new = ""
     init(){
         UITableView.appearance().backgroundColor = .clear
@@ -42,7 +41,8 @@ struct TreatView: View {
                         .shadow(color: Color.gray, radius:5, x:5, y:5)
 
                     Button(action: {
-//                        treatArray.append(self.new)
+                        RewordEntity.create(in: viewContext, title: new)
+                        new = ""
                     }, label: {
                         Image(systemName: "plus.circle.fill")
                             .font(.system(size: 25, weight: .medium, design: .default))
@@ -52,25 +52,33 @@ struct TreatView: View {
                 }
                 .padding(20)
                 List{
-                    ForEach(treatArray,id:\.self){ treat in
-                        Text(treat)
+                    ForEach(rewords,id:\.self){ reword in
+                        Text(reword.title!)
                             .frame(height:30)
                     }
-                    .onDelete{offsets in
-                        self.treatArray.remove(atOffsets: offsets)}
+                    .onDelete(perform: deleteReword)
                     .listRowBackground(Color.MyTheme.yellowColor.opacity(0.7))
+
                 }
             }
         }
         .navigationBarTitle("Reword")
         .navigationBarTitleDisplayMode(.large)
     }
+    
+    func deleteReword(offsets: IndexSet){
+        withAnimation{
+            offsets.map{rewords[$0]}.forEach(viewContext.delete)
+        }
+    }
 }
 
 struct TreatView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView{
+            let context = PersistenceController.preview.container.viewContext
             TreatView()
+                .environment(\.managedObjectContext, context)
         }
     }
 }

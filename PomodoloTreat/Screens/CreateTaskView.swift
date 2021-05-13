@@ -12,6 +12,12 @@ import SwiftUI
 struct CreateTaskView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) private var presentationMode
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \RewordEntity.title,
+                                           ascending: true)],
+        animation: .default)
+    private var rewords: FetchedResults<RewordEntity>
+
     @Binding var isPresented:Bool
     @Binding var start_time:Date
     @Binding var end_time:Date
@@ -86,29 +92,16 @@ struct CreateTaskView: View {
             spacing: nil,
             pinnedViews: [],
             content: {
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(Color.white)
-                    .overlay(
-                        Text("ナッツ3粒GET")
-                            .font(.custom("Roboto Regular", size: 10))
-                            .multilineTextAlignment(.center)
-                    )
-                    .frame(width: 95, height: 95)
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(Color.white)
-                    .frame(width: 95, height: 95)
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(Color.white)
-                    .frame(width: 95, height: 95)
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(Color.white)
-                    .frame(width: 95, height: 95)
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(RadialGradient.RadialBlue)
-                    .frame(width: 95, height: 95)
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(Color.white)
-                    .frame(width: 95, height: 95)
+                ForEach(rewords, id: \.self){ reword in
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color.white)
+                        .overlay(
+                            Text(reword.title!)
+                                .font(.custom("Roboto Regular", size: 10))
+                                .multilineTextAlignment(.center)
+                        )
+                        .frame(width: 95, height: 95)
+                }
             })
             .padding(.vertical,20)
             .padding(.horizontal,20)
@@ -141,7 +134,8 @@ struct CreateTaskView: View {
                           motivation: motivation,
                           start_time: start_time,
                           end_time: end_time
-                          )    }
+                          )
+    }
 }
 
 struct CreateTaskView_Previews: PreviewProvider {

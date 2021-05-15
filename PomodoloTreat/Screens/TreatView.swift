@@ -47,7 +47,7 @@ struct TreatView: View {
                         Image(systemName: "plus.circle.fill")
                             .font(.system(size: 25, weight: .medium, design: .default))
                             .shadow(color: Color.gray, radius:5, x:5, y:5)
-                            .accentColor(Color.MyTheme.yellowColor)
+                            .accentColor(Color.MyTheme.redColor)
                     })
                 }
                 .padding(20)
@@ -57,7 +57,7 @@ struct TreatView: View {
                             .frame(height:30)
                     }
                     .onDelete(perform: deleteReword)
-                    .listRowBackground(Color.MyTheme.yellowColor.opacity(0.7))
+                    .listRowBackground(LinearGradient.gradientOrange.opacity(0.7))
 
                 }
             }

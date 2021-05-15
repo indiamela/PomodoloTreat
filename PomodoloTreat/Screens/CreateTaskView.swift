@@ -29,7 +29,6 @@ struct CreateTaskView: View {
     
     var body: some View {
         VStack{
-            Spacer()
             //Title
             HStack{
                 TextField("Title", text: $title)
@@ -37,7 +36,7 @@ struct CreateTaskView: View {
                     .shadow(color: Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)), radius:4, x:0, y:4)
                 Spacer()
             }
-            .padding(.top,20)
+            .padding(.top,100)
             .padding(.horizontal,20)
             
             //Date
@@ -75,9 +74,9 @@ struct CreateTaskView: View {
             VStack(alignment: .leading){
                 Text("Memo")
                     .font(.caption)
-                MultilineTextView(text: $memo)
+                //MultilineTextView(text: $memo)
+                TextField("memo", text: $memo)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .frame(height: 70)
             }
             .padding(.top,20)
             .padding(.horizontal,20)

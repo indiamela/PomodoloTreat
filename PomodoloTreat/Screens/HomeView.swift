@@ -81,7 +81,7 @@ struct HomeView: View {
                     .onTapGesture(perform: {
                         if self.timerManager.timerMode == .initial {
                             startTime = Date()
-                            passedTime = self.availableMinutes[0]*60
+                            passedTime = self.availableMinutes[0]*3
                             endTime = startTime.addingTimeInterval(TimeInterval(passedTime))
                             self.timerManager.setTimerLength(minutes: self.passedTime)
                         }
@@ -94,6 +94,8 @@ struct HomeView: View {
                 })
                 .accentColor(Color.MyTheme.whiteColor)
                 .opacity(self.timerManager.timerMode == .paused ? 1.0 : 0.0)
+                .font(.title)
+                .padding()
                 Spacer()
                 //Rectangle
                 ZStack{
@@ -103,14 +105,16 @@ struct HomeView: View {
                         .shadow(color: Color.gray, radius:20, x:10, y:10)
                     
                     VStack{
+                        var indexTask = tasks[0]
                         ScrollView{
                             ForEach(tasks ,id:\.self){ task in
                                 DoneListSubView(task: task)
                                     .onTapGesture {
+                                        indexTask = task
                                         showDetail = true
                                     }
                                     .sheet(isPresented: $showDetail, content: {
-                                        TaskDetailView(taskArray: task, isPresented: $showDetail)
+                                        TaskDetailView(taskArray: indexTask, isPresented: $showDetail)
                                     })
                             }
                             .onDelete(perform: deleteTask)

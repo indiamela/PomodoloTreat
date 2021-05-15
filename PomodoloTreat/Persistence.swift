@@ -13,7 +13,6 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
             let newTask = TaskEntity(context: viewContext)
             newTask.id = UUID().uuidString
             newTask.title = "読書"
@@ -21,7 +20,6 @@ struct PersistenceController {
             newTask.motivation = 60
             newTask.start_time = Date()
             newTask.end_time = Date()
-        }
         let newReword = RewordEntity(context: viewContext)
         newReword.id = UUID().uuidString
         newReword.title = "ナッツ3粒GET"

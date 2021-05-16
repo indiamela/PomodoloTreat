@@ -13,7 +13,7 @@ struct SettingsView: View {
     var body: some View {
             Form{
                 Section(header: Text("TimerSet"))  {
-                    Picker(selection: self.$timerManager.selectedWorkTimerIndex, label: Text("Work")) {
+                    Picker(selection: $timerManager.selectedWorkTimerIndex, label: Text("Work")) {
                         ForEach(0 ..< availableMinutes.count) {
                             Text("\(self.availableMinutes[$0]) min")
                         }

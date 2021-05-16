@@ -15,6 +15,8 @@ struct HomeView: View {
     private var tasks: FetchedResults<TaskEntity>
     
     @ObservedObject var timerManager = TimerManager()
+    @State var selectedPickerIndex = 0
+    let availableMinutes = Array(1...59)
     
     @State var detailArray = TaskEntity()
     @State var newArray = TaskEntity()
@@ -26,7 +28,7 @@ struct HomeView: View {
     @State var endTime = Date()
     @State var passedTime = 60
     @State var showActivityView = false
-    let availableMinutes = Array(1...59)
+    @State var showMenuView = false
     
     
     var body: some View {
@@ -35,32 +37,41 @@ struct HomeView: View {
                 .edgesIgnoringSafeArea(.all)
             //MARK:TIMER -
             VStack{
-                HStack{
-                    Image(systemName: "text.justify")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 20)
-                        .foregroundColor(Color.MyTheme.whiteColor)
-                    Spacer()
-                    Button(action: {
-                        showActivityView = true
-                    }, label: {
-                        Image(systemName: "square.and.arrow.up")
-                            .resizable()
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 20)
-                            .foregroundColor(Color.MyTheme.whiteColor)
-                    })
-                    //TODO: share
-                    //                            .sheet(isPresented: self.$showActivityView) {
-                    //                                ActivityView(
-                    //                                    activityItems: ["abc"],
-                    //                                    applicationActivities: nil
-                    //                                )
-                    //                            }
-                }
-                .padding(.top,60)
+                Rectangle()
+                    .fill(LinearGradient.gradientOrange)
+                    .frame(height:60)
+//                HStack{
+//                    Button(action: {
+//                        showMenuView.toggle()
+//                    }, label: {
+//                        Image(systemName: "text.justify")
+//                            .resizable()
+//                            .scaledToFit()
+//                            .frame(width: 20)
+//                            .foregroundColor(Color.MyTheme.whiteColor)
+//                    })
+//
+//                    Spacer()
+//                    Button(action: {
+//                        showActivityView = true
+//                    }, label: {
+//                        Image(systemName: "square.and.arrow.up")
+//                            .resizable()
+//                            .resizable()
+//                            .scaledToFit()
+//                            .frame(width: 20)
+//                            .foregroundColor(Color.MyTheme.whiteColor)
+//                    })
+//
+//                    //TODO: share
+//                    //                            .sheet(isPresented: self.$showActivityView) {
+//                    //                                ActivityView(
+//                    //                                    activityItems: ["abc"],
+//                    //                                    applicationActivities: nil
+//                    //                                )
+//                    //                            }
+//                }
+//                .padding(.top,60)
                 .padding(.horizontal,30)
                 
                 //25:00
@@ -81,7 +92,7 @@ struct HomeView: View {
                     .onTapGesture(perform: {
                         if self.timerManager.timerMode == .initial {
                             startTime = Date()
-                            passedTime = self.availableMinutes[0]*3
+                            passedTime = self.availableMinutes[self.timerManager.selectedWorkTimerIndex]*3
                             endTime = startTime.addingTimeInterval(TimeInterval(passedTime))
                             self.timerManager.setTimerLength(minutes: self.passedTime)
                         }
@@ -94,7 +105,6 @@ struct HomeView: View {
                 })
                 .accentColor(Color.MyTheme.whiteColor)
                 .opacity(self.timerManager.timerMode == .paused ? 1.0 : 0.0)
-                .font(.title)
                 .padding()
                 Spacer()
                 //Rectangle
@@ -129,6 +139,9 @@ struct HomeView: View {
                     }
                 }
             }
+            .edgesIgnoringSafeArea(.all)
+            SideMenuView(isOpen: $showMenuView)
+
         }
         .edgesIgnoringSafeArea(.all)
         

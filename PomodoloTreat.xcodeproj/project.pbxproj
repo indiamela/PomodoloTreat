@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		F22A60D4264DE1B300834F33 /* RewordEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A60D3264DE1B300834F33 /* RewordEntity.swift */; };
 		F22A60D6264F71B600834F33 /* ViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A60D5264F71B600834F33 /* ViewManager.swift */; };
+		F22A60D8264FBDFD00834F33 /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A60D7264FBDFC00834F33 /* SideMenuView.swift */; };
+		F22A60DA264FC87D00834F33 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A60D9264FC87D00834F33 /* SettingsView.swift */; };
 		F246830D263FC1480060223A /* TaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246830C263FC1480060223A /* TaskDetailView.swift */; };
 		F246830F263FDD790060223A /* MultilineTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246830E263FDD790060223A /* MultilineTextView.swift */; };
 		F2468313263FFFD20060223A /* TreatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2468312263FFFD20060223A /* TreatView.swift */; };
@@ -52,6 +54,8 @@
 /* Begin PBXFileReference section */
 		F22A60D3264DE1B300834F33 /* RewordEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewordEntity.swift; sourceTree = "<group>"; };
 		F22A60D5264F71B600834F33 /* ViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewManager.swift; sourceTree = "<group>"; };
+		F22A60D7264FBDFC00834F33 /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
+		F22A60D9264FC87D00834F33 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		F246830C263FC1480060223A /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
 		F246830E263FDD790060223A /* MultilineTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextView.swift; sourceTree = "<group>"; };
 		F2468312263FFFD20060223A /* TreatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreatView.swift; sourceTree = "<group>"; };
@@ -109,6 +113,8 @@
 		F2A2F1C9263EA07600FE4FEA = {
 			isa = PBXGroup;
 			children = (
+				F22A60D9264FC87D00834F33 /* SettingsView.swift */,
+				F22A60D7264FBDFC00834F33 /* SideMenuView.swift */,
 				F2A2F1D4263EA07700FE4FEA /* PomodoloTreat */,
 				F2A2F1EB263EA07900FE4FEA /* PomodoloTreatTests */,
 				F2A2F1F6263EA07900FE4FEA /* PomodoloTreatUITests */,
@@ -337,6 +343,8 @@
 			files = (
 				F246831726400DC00060223A /* TreatSubView.swift in Sources */,
 				F2A2F213263F82BA00FE4FEA /* DoneListSubView.swift in Sources */,
+				F22A60D8264FBDFD00834F33 /* SideMenuView.swift in Sources */,
+				F22A60DA264FC87D00834F33 /* SettingsView.swift in Sources */,
 				F2468313263FFFD20060223A /* TreatView.swift in Sources */,
 				F2A2F20A263EC02100FE4FEA /* ColorExtention.swift in Sources */,
 				F2A2F208263EA47700FE4FEA /* HomeView.swift in Sources */,

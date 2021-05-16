@@ -10,6 +10,11 @@ import SwiftUI
 struct TaskDetailView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \RewordEntity.title,
+                                           ascending: true)],
+        animation: .default)
+    private var rewords: FetchedResults<RewordEntity>
+    @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \TaskEntity.start_time, ascending: true)],
         animation: .default)
     private var tasks: FetchedResults<TaskEntity>
@@ -19,7 +24,6 @@ struct TaskDetailView: View {
     
     var body: some View {
             VStack{
-                Spacer()
                 //Title
                 HStack{
                     Text(taskArray.title!)
@@ -27,7 +31,7 @@ struct TaskDetailView: View {
                         .shadow(color: Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)), radius:4, x:0, y:4)
                     Spacer()
                 }
-                .padding(.top,20)
+                .padding(.top,100)
                 .padding(.horizontal,20)
                 
                 //Date
@@ -85,29 +89,16 @@ struct TaskDetailView: View {
                 spacing: nil,
                 pinnedViews: [],
                 content: {
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(Color.white)
-                        .overlay(
-                            Text("ナッツ3粒GET")
-                                .font(.custom("Roboto Regular", size: 10))
-                                .multilineTextAlignment(.center)
-                        )
-                        .frame(width: 95, height: 95)
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(Color.white)
-                        .frame(width: 95, height: 95)
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(Color.white)
-                        .frame(width: 95, height: 95)
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(Color.white)
-                        .frame(width: 95, height: 95)
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(RadialGradient.RadialBlue)
-                        .frame(width: 95, height: 95)
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(Color.white)
-                        .frame(width: 95, height: 95)
+                    ForEach(rewords, id: \.self){ reword in
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(Color.white)
+                            .overlay(
+                                Text(reword.title!)
+                                    .font(.custom("Roboto Regular", size: 10))
+                                    .multilineTextAlignment(.center)
+                            )
+                            .frame(width: 95, height: 95)
+                    }
                 })
                 .padding(.vertical,20)
                 .padding(.horizontal,20)

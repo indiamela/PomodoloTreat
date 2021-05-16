@@ -13,6 +13,8 @@ import Combine
 class TimerManager: ObservableObject {
     let ObjectWillChange = ObservableObjectPublisher()
     @Published var timerMode: TimerMode = .initial
+    @Published var selectedWorkTimerIndex = 0
+    @Published var selectedRestTimerIndex = 0
     var timeFinish = false{
         //@Publishedでラップされたのを外す処理
         willSet{

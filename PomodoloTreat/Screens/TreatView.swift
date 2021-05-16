@@ -1,5 +1,5 @@
 //
-//  TreatView.swift
+//  RewordView.swift
 //  PomodoloTreat
 //
 //  Created by Taishi Kusunose on 2021/05/03.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TreatView: View {
+struct RewordView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \RewordEntity.title,
@@ -73,11 +73,11 @@ struct TreatView: View {
     }
 }
 
-struct TreatView_Previews: PreviewProvider {
+struct RewordView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView{
             let context = PersistenceController.preview.container.viewContext
-            TreatView()
+            RewordView()
                 .environment(\.managedObjectContext, context)
         }
     }

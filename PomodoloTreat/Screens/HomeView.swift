@@ -18,6 +18,7 @@ struct HomeView: View {
     @State var selectedPickerIndex = 0
     let availableMinutes = Array(1...59)
     init(timerManager: TimerManager){
+        
     }
     
     @State var detailArray = TaskEntity()

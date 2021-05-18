@@ -17,9 +17,6 @@ struct HomeView: View {
     @ObservedObject var timerManager = TimerManager()
     @State var selectedPickerIndex = 0
     let availableMinutes = Array(1...59)
-    init(timerManager: TimerManager){
-        
-    }
     
     @State var detailArray = TaskEntity()
     @State var newArray = TaskEntity()
@@ -78,7 +75,7 @@ struct HomeView: View {
                 .padding(.horizontal,30)
                 
                 //25:00
-                Text(secondsToMinutesAndSeconds(seconds: self.availableMinutes[$timerManager.selectedWorkTimerIndex.wrappedValue]*60))
+                Text(secondsToMinutesAndSeconds(seconds: timerManager.selectedWorkTimerIndex*60))
                     .font(.custom("Roboto Regular", size: 72))
                     .foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
                     .multilineTextAlignment(.center)

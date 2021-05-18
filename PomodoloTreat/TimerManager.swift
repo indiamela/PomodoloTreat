@@ -12,8 +12,13 @@ import Combine
 
 class TimerManager: ObservableObject {
     let ObjectWillChange = ObservableObjectPublisher()
+    let availableMinutes = Array(1...59)
     @Published var timerMode: TimerMode = .initial
-    @Published var selectedWorkTimerIndex = 0
+    @Published var selectedWorkTimerIndex = 0 {
+        didSet{
+            ObjectWillChange.send()
+        }
+    }
     @Published var selectedRestTimerIndex = 0
     var timeFinish = false{
         //@Publishedでラップされたのを外す処理

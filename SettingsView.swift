@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @State var viblation = true
     @EnvironmentObject var timerManager:TimerManager
     let availableMinutes = Array(1...59)
     var body: some View {
             Form{
-                Section(header: Text("TimerSet"))  {
+                Section(header: Text("タイマーの長さ"))  {
                     Picker(selection: $timerManager.selectedWorkTimerIndex, label: Text("Work")) {
                         ForEach(0 ..< availableMinutes.count) {
                             Text("\(self.availableMinutes[$0]) min")
@@ -25,8 +26,13 @@ struct SettingsView: View {
                     }
                 }
                 
-                Section(header: Text("ヘッダーテキスト")) {
-                    Text("部品３")
+                Section(header: Text("アラーム")) {
+                    HStack{
+                        Toggle(isOn: $viblation,
+                               label: {
+                                Text("ヴァイブレーション")
+                               })
+                    }
                     Text("部品４")
                 }
             }

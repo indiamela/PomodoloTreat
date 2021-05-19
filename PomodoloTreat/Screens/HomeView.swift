@@ -9,12 +9,12 @@ import SwiftUI
 
 struct HomeView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @EnvironmentObject var timerManager:TimerManager
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \TaskEntity.start_time, ascending: true)],
         animation: .default)
     private var tasks: FetchedResults<TaskEntity>
     
-    @ObservedObject var timerManager = TimerManager()
     @State var selectedPickerIndex = 0
     let availableMinutes = Array(1...59)
     
@@ -75,7 +75,7 @@ struct HomeView: View {
                 .padding(.horizontal,30)
                 
                 //25:00
-                Text(secondsToMinutesAndSeconds(seconds: timerManager.selectedWorkTimerIndex*60))
+                Text(secondsToMinutesAndSeconds(seconds:timerManager.secondsLeft))
                     .font(.custom("Roboto Regular", size: 72))
                     .foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
                     .multilineTextAlignment(.center)
@@ -92,7 +92,7 @@ struct HomeView: View {
                     .onTapGesture(perform: {
                         if self.timerManager.timerMode == .initial {
                             startTime = Date()
-                            passedTime = self.availableMinutes[$timerManager.selectedWorkTimerIndex.wrappedValue]*60
+                            passedTime = self.availableMinutes[timerManager.selectedWorkTimerIndex]*60
                             endTime = startTime.addingTimeInterval(TimeInterval(passedTime))
                             self.timerManager.setTimerLength(minutes: self.passedTime)
                         }

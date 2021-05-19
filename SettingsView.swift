@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @ObservedObject var timerManager = TimerManager()
+    @EnvironmentObject var timerManager:TimerManager
     let availableMinutes = Array(1...59)
     var body: some View {
             Form{

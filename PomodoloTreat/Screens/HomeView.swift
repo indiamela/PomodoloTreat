@@ -115,16 +115,14 @@ struct HomeView: View {
                         .shadow(color: Color.gray, radius:20, x:10, y:10)
                     
                     VStack{
-                        var indexTask = tasks[0]
                         ScrollView{
                             ForEach(tasks ,id:\.self){ task in
                                 DoneListSubView(task: task)
                                     .onTapGesture {
-                                        indexTask = task
                                         showDetail = true
                                     }
                                     .sheet(isPresented: $showDetail, content: {
-                                        TaskDetailView(taskArray: indexTask, isPresented: $showDetail)
+                                        TaskDetailView(taskArray: task, isPresented: $showDetail)
                                     })
                             }
                             .onDelete(perform: deleteTask)
@@ -165,6 +163,8 @@ struct HomeView_Previews: PreviewProvider {
         return NavigationView{
             HomeView()
                 .environment(\.managedObjectContext, context)
+                .environmentObject(TimerManager())
+
         }
     }
 }

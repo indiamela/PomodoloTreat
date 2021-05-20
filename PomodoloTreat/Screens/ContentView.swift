@@ -24,7 +24,7 @@ struct ContentView: View {
             }
             .navigationBarHidden(true)
             .tabItem {
-                Image(systemName: "gift")
+                Image(systemName: "rosette")
                 Text("Reword")
             }
             NavigationView{
@@ -38,8 +38,8 @@ struct ContentView: View {
                 SettingsView()
             }
             .tabItem {
-                Image(systemName: "chart.bar.xaxis")
-                Text("Chart")
+                Image(systemName: "gearshape")
+                Text("Settings")
             }
         }
         .accentColor(Color.MyTheme.yellowColor)
@@ -114,6 +114,8 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(TimerManager())
+
 //            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

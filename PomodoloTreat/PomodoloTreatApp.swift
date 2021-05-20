@@ -10,7 +10,7 @@ import CoreData
 
 @main
 struct PomodoloTreatApp: App {
-    let persistenceController = PersistenceController.preview
+    let persistenceController = PersistenceController.shared
 
     var body: some Scene {
         WindowGroup {

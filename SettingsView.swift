@@ -33,7 +33,12 @@ struct SettingsView: View {
                                 Text("ヴァイブレーション")
                                })
                     }
-                    Text("部品４")
+                    HStack{
+                        Toggle(isOn: $viblation,
+                               label: {
+                                Text("ヴァイブレーション")
+                               })
+                    }
                 }
             }
         .navigationTitle("Setting")
@@ -44,6 +49,7 @@ struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView{
             SettingsView()
+                .environmentObject(TimerManager())
         }
     }
 }

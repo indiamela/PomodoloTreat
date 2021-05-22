@@ -41,8 +41,10 @@ struct RewordView: View {
                         .shadow(color: Color.gray, radius:5, x:5, y:5)
 
                     Button(action: {
-                        RewordEntity.create(in: viewContext, title: new)
-                        new = ""
+                        if !new.isEmpty {
+                            RewordEntity.create(in: viewContext, title: new)
+                            new = ""
+                        }
                     }, label: {
                         Image(systemName: "plus.circle.fill")
                             .font(.system(size: 25, weight: .medium, design: .default))

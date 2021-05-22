@@ -34,7 +34,7 @@ struct PersistenceController {
 
     let container: NSPersistentContainer
 
-    init(inMemory: Bool = true) {
+    init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "PomodoloTreat")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")

@@ -19,18 +19,18 @@ struct SettingsView: View {
                             Text("\(self.availableMinutes[$0]) min")
                         }
                     }
-                    Picker(selection: self.$timerManager.selectedRestTimerIndex, label: Text("Rest")) {
-                        ForEach(0 ..< availableMinutes.count) {
-                            Text("\(self.availableMinutes[$0]) min")
-                        }
-                    }
+//                    Picker(selection: self.$timerManager.selectedRestTimerIndex, label: Text("Rest")) {
+//                        ForEach(0 ..< availableMinutes.count) {
+//                            Text("\(self.availableMinutes[$0]) min")
+//                        }
+//                    }
                 }
                 
                 Section(header: Text("アラーム")) {
                     HStack{
                         Toggle(isOn: $viblation,
                                label: {
-                                Text("ヴァイブレーション")
+                                Text("通知音")
                                })
                     }
                     HStack{

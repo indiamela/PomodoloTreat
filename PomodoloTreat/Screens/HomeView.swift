@@ -40,38 +40,6 @@ struct HomeView: View {
                 Rectangle()
                     .fill(LinearGradient.gradientOrange)
                     .frame(height:60)
-//                HStack{
-//                    Button(action: {
-//                        showMenuView.toggle()
-//                    }, label: {
-//                        Image(systemName: "text.justify")
-//                            .resizable()
-//                            .scaledToFit()
-//                            .frame(width: 20)
-//                            .foregroundColor(Color.MyTheme.whiteColor)
-//                    })
-//
-//                    Spacer()
-//                    Button(action: {
-//                        showActivityView = true
-//                    }, label: {
-//                        Image(systemName: "square.and.arrow.up")
-//                            .resizable()
-//                            .resizable()
-//                            .scaledToFit()
-//                            .frame(width: 20)
-//                            .foregroundColor(Color.MyTheme.whiteColor)
-//                    })
-//
-//                    //TODO: share
-//                    //                            .sheet(isPresented: self.$showActivityView) {
-//                    //                                ActivityView(
-//                    //                                    activityItems: ["abc"],
-//                    //                                    applicationActivities: nil
-//                    //                                )
-//                    //                            }
-//                }
-//                .padding(.top,60)
                 .padding(.horizontal,30)
                 
                 //25:00
@@ -107,9 +75,7 @@ struct HomeView: View {
                 .opacity(self.timerManager.timerMode == .paused ? 1.0 : 0.0)
                 .padding()
                 Spacer()
-                //Rectangle
                 ZStack{
-
                     RoundedRectangle(cornerRadius: 30, style: .circular)
                         .fill(Color.MyTheme.whiteColor)
                         .shadow(color: Color.gray, radius:20, x:10, y:10)
@@ -125,7 +91,6 @@ struct HomeView: View {
                                         TaskDetailView(taskArray: task, isPresented: $showDetail)
                                     })
                             }
-                            .onDelete(perform: deleteTask)
                         }
                         .padding(.top,30)
                         .sheet(isPresented: $timerManager.timeFinish, content: {

@@ -27,13 +27,13 @@ struct ContentView: View {
                 Image(systemName: "rosette")
                 Text("Reword")
             }
-            NavigationView{
-                HomeView()
-            }
-            .tabItem {
-                Image(systemName: "calendar")
-                Text("Calendar")
-            }
+//            NavigationView{
+//                HomeView()
+//            }
+//            .tabItem {
+//                Image(systemName: "calendar")
+//                Text("Calendar")
+//            }
             NavigationView{
                 SettingsView()
             }

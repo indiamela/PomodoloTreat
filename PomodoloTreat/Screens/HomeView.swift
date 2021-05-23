@@ -81,15 +81,17 @@ struct HomeView: View {
                         .shadow(color: Color.gray, radius:20, x:10, y:10)
                     
                     VStack{
-                        ScrollView{
-                            ForEach(tasks ,id:\.self){ task in
-                                DoneListSubView(task: task)
-                                    .onTapGesture {
-                                        showDetail = true
-                                    }
-                                    .sheet(isPresented: $showDetail, content: {
-                                        TaskDetailView(taskArray: task, isPresented: $showDetail)
-                                    })
+                        List{
+                            ForEach(tasks){ task in
+                                Button(action: {
+                                    showDetail.toggle()
+                                }
+                                , label: {
+                                    DoneListSubView(task: task)
+                                })
+                                .sheet(isPresented: self.$showDetail, content: {
+                                    TaskDetailView(taskArray: task, isPresented: $showDetail)
+                                })
                             }
                         }
                         .padding(.top,30)
@@ -124,7 +126,7 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        let context = PersistenceController.preview.container.viewContext
+        let context = PersistenceController.shared.container.viewContext
         return NavigationView{
             HomeView()
                 .environment(\.managedObjectContext, context)

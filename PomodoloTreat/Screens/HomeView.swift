@@ -81,7 +81,7 @@ struct HomeView: View {
                         .shadow(color: Color.gray, radius:20, x:10, y:10)
                     
                     VStack{
-                        List{
+                        ScrollView{
                             ForEach(tasks){ task in
                                 Button(action: {
                                     showDetail.toggle()
@@ -94,6 +94,7 @@ struct HomeView: View {
                                 })
                             }
                         }
+                        .accentColor(.black)
                         .padding(.top,30)
                         .sheet(isPresented: $timerManager.timeFinish, content: {
                             CreateTaskView(isPresented:$timerManager.timeFinish,start_time: $startTime,end_time: $endTime)

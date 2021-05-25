@@ -126,6 +126,7 @@ struct TaskDetailView: View {
             .background(Color.MyTheme.whiteColor)
             .cornerRadius(20)
             .edgesIgnoringSafeArea(.all)
+            .onDisappear {  self.isPresented = false }
     }
     func deleteTask(){
         tasks.filter{$0.id == taskArray.id}.forEach(viewContext.delete)
